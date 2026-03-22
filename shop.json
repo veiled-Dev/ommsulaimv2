@@ -1,0 +1,74 @@
+[
+  {
+    "id": "shop-digital-1",
+    "category": "digital-products",
+    "title": "Qur’an Reading Ebook",
+    "description": "Step-by-step guide to learn Qur’an reading with proper Tajweed.",
+    "price": "₦2,500",
+    "buyLink": "/contact"
+  },
+  {
+    "id": "shop-digital-2",
+    "category": "digital-products",
+    "title": "Tarteel & Tajweed Guide",
+    "description": "Enhance your recitation skills with melody, rhythm, and Tajweed rules.",
+    "price": "₦3,000",
+    "buyLink": "/contact"
+  },
+  {
+    "id": "shop-digital-3",
+    "category": "digital-products",
+    "title": "Memorization (Hifz) Handbook",
+    "description": "Structured support for memorizing the Qur’an efficiently.",
+    "price": "₦2,800",
+    "buyLink": "/contact"
+  },
+  {
+    "id": "shop-clothing-1",
+    "category": "clothing",
+    "title": "Modest Long Dress",
+    "description": "Comfortable and stylish long dress suitable for all occasions.",
+    "price": "₦8,500",
+    "buyLink": "/contact"
+  },
+  {
+    "id": "shop-clothing-2",
+    "category": "clothing",
+    "title": "Kids Prayer Outfit",
+    "description": "Lightweight and comfortable outfit for children during learning or prayer.",
+    "price": "₦5,000",
+    "buyLink": "/contact"
+  },
+  {
+    "id": "shop-clothing-3",
+    "category": "clothing",
+    "title": "Women’s Abaya",
+    "description": "Elegant, breathable abaya for everyday wear or special events.",
+    "price": "₦10,000",
+    "buyLink": "/contact"
+  },
+  {
+    "id": "shop-accessories-1",
+    "category": "accessories",
+    "title": "Learning Bag",
+    "description": "Durable and stylish bag for books, devices, and learning essentials.",
+    "price": "₦6,500",
+    "buyLink": "/contact"
+  },
+  {
+    "id": "shop-accessories-2",
+    "category": "accessories",
+    "title": "Prayer Mat Kit",
+    "description": "Portable and lightweight mat with storage for easy use anywhere.",
+    "price": "₦3,000",
+    "buyLink": "/contact"
+  },
+  {
+    "id": "shop-accessories-3",
+    "category": "accessories",
+    "title": "Stationery Set",
+    "description": "Curated set of pens, notebooks, and study tools for students.",
+    "price": "₦2,000",
+    "buyLink": "/contact"
+  }
+]
