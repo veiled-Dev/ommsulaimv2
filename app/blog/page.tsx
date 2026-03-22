@@ -136,11 +136,11 @@ export default async function BlogPage({ searchParams }: PageProps) {
                       alt={featured.title}
                       width={1600}
                       height={900}
-                      className="h-80 w-full object-cover"
+                      className="h-56 w-full object-cover md:h-64"
                       priority
                     />
                   ) : (
-                    <div className="flex h-80 items-center justify-center bg-slate-100 text-slate-500">
+                    <div className="flex h-56 items-center justify-center bg-slate-100 text-slate-500 md:h-64">
                       No image
                     </div>
                   )}
@@ -165,7 +165,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                   <div className="space-y-4">
                     {latestPosts.map((post) => (
                       <article key={post.id} className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-                        <div className="grid gap-0 md:grid-cols-[220px,1fr]">
+                        <div className="grid gap-0 md:grid-cols-[180px,1fr]">
                           {post.image ? (
                             <Link href={`/blog/${post.slug}`} className="block h-full">
                               <Image
@@ -173,11 +173,11 @@ export default async function BlogPage({ searchParams }: PageProps) {
                                 alt={post.title}
                                 width={900}
                                 height={600}
-                                className="h-full min-h-44 w-full object-cover"
+                                className="h-full min-h-36 w-full object-cover"
                               />
                             </Link>
                           ) : (
-                            <div className="h-44 w-full bg-slate-100 md:h-full" />
+                            <div className="h-36 w-full bg-slate-100 md:h-full" />
                           )}
 
                           <div className="p-5">
