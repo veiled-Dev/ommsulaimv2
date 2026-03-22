@@ -36,7 +36,7 @@ export default function Footer() {
         {/* Contact */}
         <div>
           <h3 className="font-bold text-lg mb-4">Contact</h3>
-          <p>WhatsApp: <a href="https://wa.me/234XXXXXXXXXX" className="text-sky-700 hover:text-amber-700 hover:underline">+234XXXXXXXXXX</a></p>
+          <p>WhatsApp: <a href="https://wa.me/2349160341006" className="text-sky-700 hover:text-amber-700 hover:underline">+2349160341006</a></p>
           <p>Email: <a href="mailto:support@ommsulaim.com" className="text-sky-700 hover:text-amber-700 hover:underline">support@ommsulaim.com</a></p>
         </div>
       </div>

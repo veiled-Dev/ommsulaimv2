@@ -29,6 +29,17 @@ export default async function QuranMemorizationPage({ searchParams }: PageProps)
           </Link>
         </div>
 
+        <section className="mx-auto mb-8 max-w-5xl rounded-xl border border-gray-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
+          <h2 className="text-lg font-semibold">How it works</h2>
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-gray-700 dark:text-slate-200">
+            <li>Set your total pages, current starting page, and old memorized pages.</li>
+            <li>Choose how many new pages you want to memorize each day and how many weeks to generate.</li>
+            <li>New revision runs in a circular cycle over the last 10 days of your new memorization.</li>
+            <li>Old revision is spread across the week so the full old pool is completed every 7 days.</li>
+            <li>Tick the “Done” checkbox each day to track progress; your data auto-saves on this device.</li>
+          </ol>
+        </section>
+
         <div className="mx-auto max-w-5xl">
           <MemorizationPlanner />
         </div>

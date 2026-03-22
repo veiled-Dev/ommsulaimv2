@@ -85,7 +85,7 @@ export default function ContactPage() {
           </p>
           <div className="mt-6">
             <a
-              href="https://wa.me/2349060341006"
+              href="https://wa.me/2349160341006"
               className="rounded-lg border border-amber-400 bg-white px-6 py-3 text-sm font-medium text-slate-900 transition hover:bg-amber-50"
             >
               WhatsApp Us

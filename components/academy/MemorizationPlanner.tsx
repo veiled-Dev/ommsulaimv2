@@ -177,6 +177,8 @@ export default function MemorizationPlanner() {
         <div className="rounded-lg bg-gray-50 p-3 text-sm text-gray-700 dark:bg-slate-800 dark:text-slate-200">
           <p>Weekly new memorization: <strong>{weeklyNew}</strong> pages</p>
           <p>Estimated weeks to finish: <strong>{estWeeks}</strong></p>
+          <p>New revision cycle: <strong>last 10 days (circular)</strong></p>
+          <p>Old revision cycle: <strong>completed every 7 days</strong></p>
           <p>Progress: <strong>{doneDays}/{totalDays}</strong> days ({progressPct}%)</p>
           <p className="mt-1 text-xs text-gray-500">
             {hydrated ? "Auto-saved locally." : "Loading saved progress..."}
@@ -213,8 +215,8 @@ export default function MemorizationPlanner() {
                     <th className="px-4 py-2 text-left">Done</th>
                     <th className="px-4 py-2 text-left">Day</th>
                     <th className="px-4 py-2 text-left">New Memorization</th>
-                    <th className="px-4 py-2 text-left">New Revision</th>
-                    <th className="px-4 py-2 text-left">Old Revision</th>
+                    <th className="px-4 py-2 text-left">New Revision (10-day circle)</th>
+                    <th className="px-4 py-2 text-left">Old Revision (7-day cycle)</th>
                   </tr>
                 </thead>
                 <tbody>

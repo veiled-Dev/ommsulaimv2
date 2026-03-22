@@ -18,6 +18,9 @@ export interface WeekPlan {
   days: DayPlan[];
 }
 
+const NEW_REVISION_CYCLE_DAYS = 10;
+const OLD_REVISION_CYCLE_DAYS = 7;
+
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const;
 
 function clampInt(value: number, min: number, max: number) {
@@ -105,6 +108,7 @@ export function buildWeeklySchedule(input: PlannerInput): WeekPlan[] {
 
   let newMemCursor = startingPage;
   let latestNewEnd = startingPage - 1;
+  let newRevCursor = 0;
 
   const plan: WeekPlan[] = [];
 
@@ -123,17 +127,23 @@ export function buildWeeklySchedule(input: PlannerInput): WeekPlan[] {
       }
 
       // 2) New revision today:
-      // previous 7 days of new memorization, excluding today's new memorization
-      const newRevisionWindowPages = pagesPerDayNew * 7;
+      // cycle through the previous 10 days of new memorization,
+      // excluding today's new memorization
+      const newRevisionWindowPages = pagesPerDayNew * NEW_REVISION_CYCLE_DAYS;
       const newRevisionEnd = newMem.range ? newMem.range[0] - 1 : latestNewEnd;
 
-      const newRevisionPages =
+      const newRevisionPoolPages =
         newRevisionEnd >= startingPage
           ? makePageRange(
               Math.max(startingPage, newRevisionEnd - newRevisionWindowPages + 1),
               newRevisionEnd
             )
           : [];
+
+      const newDailyTarget = newRevisionPoolPages.length ? Math.max(1, pagesPerDayNew) : 0;
+      const newPick = pickWrapped(newRevisionPoolPages, newRevCursor, newDailyTarget);
+      if (newRevisionPoolPages.length) newRevCursor = newPick.nextIndex;
+      const newRevisionPages = newPick.items as number[];
 
       // 3) Old revision today:
       // entire memorized portion minus new-revision pages and today's new pages
@@ -145,7 +155,7 @@ export function buildWeeklySchedule(input: PlannerInput): WeekPlan[] {
       const excludeFromOld = new Set([...newRevisionPages, ...todayNewPages]);
       const oldPoolPages = memorizedPortion.filter((p) => !excludeFromOld.has(p));
 
-      const oldDailyTarget = oldPoolPages.length ? Math.ceil(oldPoolPages.length / 7) : 0;
+      const oldDailyTarget = oldPoolPages.length ? Math.ceil(oldPoolPages.length / OLD_REVISION_CYCLE_DAYS) : 0;
       const oldPick = pickWrapped(oldPoolPages, weekOldRevCursor, oldDailyTarget);
       if (oldPoolPages.length) weekOldRevCursor = oldPick.nextIndex;
 
