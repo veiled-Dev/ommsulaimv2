@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "OmmSulaim Digital Services Ltd",
@@ -35,6 +36,7 @@ export default function RootLayout({
             </p>
           </footer>
         </div>
+        <Analytics />
       </body>
     </html>
   );
