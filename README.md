@@ -23,6 +23,14 @@ Create or update `.env.local`:
 ADMIN_PASSWORD=choose-a-strong-password
 ```
 
+To enable Google Analytics (GA4), also add:
+
+```bash
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+```
+
+Analytics is consent-gated: tracking starts only after a visitor accepts the cookie prompt.
+
 ### 2) Login
 
 - Visit `/admin/login`

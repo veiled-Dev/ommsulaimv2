@@ -195,9 +195,10 @@ function normalizePost(value: unknown): BlogPost | null {
 
   const slug = asString(row.slug).trim();
   if (!slug) return null;
+  const id = asString(row.id, "").trim() || slug;
 
   return {
-    id: asString(row.id, crypto.randomUUID()),
+    id,
     slug,
     title: asString(row.title, "Untitled Post"),
     content: asString(row.content, ""),

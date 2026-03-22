@@ -8,6 +8,7 @@ import { isAdminAuthenticated } from "@/lib/admin-auth";
 export const runtime = "nodejs";
 
 const MAX_UPLOAD_SIZE = 5 * 1024 * 1024;
+const ALLOWED_EXTENSIONS = new Set(["jpg", "jpeg", "png", "webp", "gif", "svg"]);
 
 function extensionFromFile(file: File): string {
   const mime = file.type.toLowerCase();
@@ -35,7 +36,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "No file provided." }, { status: 400 });
   }
 
-  if (!entry.type.startsWith("image/")) {
+  const ext = extensionFromFile(entry).toLowerCase();
+  const hasImageMime = entry.type.startsWith("image/");
+  if (!hasImageMime && !ALLOWED_EXTENSIONS.has(ext)) {
     return NextResponse.json({ error: "Only image files are allowed." }, { status: 400 });
   }
 
@@ -43,7 +46,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Image is too large. Max 5MB." }, { status: 400 });
   }
 
-  const ext = extensionFromFile(entry);
   const filename = `${Date.now()}-${randomUUID()}.${ext}`;
   const uploadsDir = path.join(process.cwd(), "public", "uploads");
   const filePath = path.join(uploadsDir, filename);

@@ -69,8 +69,8 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
 
   async function refreshData() {
     const [blogRes, shopRes] = await Promise.all([
-      fetch("/api/admin/blog", { cache: "no-store" }),
-      fetch("/api/admin/shop", { cache: "no-store" }),
+      fetch("/api/admin/blog", { cache: "no-store", credentials: "same-origin" }),
+      fetch("/api/admin/shop", { cache: "no-store", credentials: "same-origin" }),
     ]);
 
     if (!blogRes.ok || !shopRes.ok) {
@@ -98,6 +98,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
       const response = await fetch(blogForm.id ? `/api/admin/blog/${blogForm.id}` : "/api/admin/blog", {
         method: blogForm.id ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify(payload),
       });
 
@@ -122,7 +123,10 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
     setBusy(true);
     setMessage("");
     try {
-      const response = await fetch(`/api/admin/blog/${id}`, { method: "DELETE" });
+      const response = await fetch(`/api/admin/blog/${id}`, {
+        method: "DELETE",
+        credentials: "same-origin",
+      });
       if (!response.ok) throw new Error("Unable to delete post");
       await refreshData();
       if (blogForm.id === id) setBlogForm(emptyBlogForm);
@@ -151,6 +155,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
       const response = await fetch(productForm.id ? `/api/admin/shop/${productForm.id}` : "/api/admin/shop", {
         method: productForm.id ? "PATCH" : "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify(payload),
       });
 
@@ -175,7 +180,10 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
     setBusy(true);
     setMessage("");
     try {
-      const response = await fetch(`/api/admin/shop/${id}`, { method: "DELETE" });
+      const response = await fetch(`/api/admin/shop/${id}`, {
+        method: "DELETE",
+        credentials: "same-origin",
+      });
       if (!response.ok) throw new Error("Unable to delete product");
       await refreshData();
       if (productForm.id === id) setProductForm(emptyProductForm);
@@ -193,6 +201,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
 
     const response = await fetch("/api/admin/upload", {
       method: "POST",
+      credentials: "same-origin",
       body: form,
     });
 
@@ -230,7 +239,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
     setMessage("");
     try {
       const imageUrl = await uploadImage(file);
-      const snippet = `\n\n![Uploaded image](${imageUrl})\n\n`;
+      const snippet = `\n\n<img src="${imageUrl}" alt="Uploaded image" />\n\n`;
       setBlogForm((prev) => ({ ...prev, content: `${prev.content}${snippet}` }));
       setMessage("Inline image uploaded and inserted into content.");
     } catch (error) {
@@ -323,12 +332,6 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
                 <option key={c} value={c} />
               ))}
             </datalist>
-            <input
-              value={blogForm.image}
-              onChange={(e) => setBlogForm((prev) => ({ ...prev, image: e.target.value }))}
-              placeholder="Cover image path e.g /uploads/my-image.jpg"
-              className="w-full rounded-lg border border-slate-300 px-3 py-2"
-            />
             <div className="grid gap-2 sm:grid-cols-2">
               <label className="block rounded-lg border border-slate-300 px-3 py-2 text-sm">
                 <span className="font-medium text-slate-700">Upload cover image</span>
@@ -351,6 +354,23 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
                 />
               </label>
             </div>
+            {blogForm.image && (
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 text-sm">
+                <p className="mb-2 font-medium text-slate-700">Current cover image</p>
+                <img
+                  src={blogForm.image}
+                  alt="Cover preview"
+                  className="max-h-48 w-full rounded-lg border border-slate-200 object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={() => setBlogForm((prev) => ({ ...prev, image: "" }))}
+                  className="mt-3 rounded-lg border border-slate-300 bg-white px-3 py-1 text-xs font-medium"
+                >
+                  Remove cover image
+                </button>
+              </div>
+            )}
             <div className="rounded-lg border border-slate-300">
               <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 bg-slate-50 p-2">
                 <button
