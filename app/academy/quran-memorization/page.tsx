@@ -21,7 +21,7 @@ export default async function QuranMemorizationPage({ searchParams }: PageProps)
       <main className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto mb-8 max-w-3xl text-center">
           <h1 className="text-3xl font-bold md:text-4xl">Qur’an Memorization Planner</h1>
-          <p className="mt-3 text-gray-700 dark:text-slate-200">
+          <p className="mt-3 text-slate-900 dark:text-slate-200">
             Build a weekly-circle schedule for new memorization, new revision, and old revision.
           </p>
           <Link href="/academy" className="mt-4 inline-block text-sm font-medium text-blue-600">
