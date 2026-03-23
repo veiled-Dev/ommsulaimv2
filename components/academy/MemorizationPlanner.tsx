@@ -218,8 +218,8 @@ export default function MemorizationPlanner() {
           <div key={week.week} className="overflow-hidden rounded-xl border border-gray-200 dark:border-slate-700">
             <div className="bg-gray-50 px-4 py-2 text-sm font-semibold dark:bg-slate-800 dark:text-slate-100">Week {week.week}</div>
             <div className="overflow-x-auto">
-              <table className="min-w-full text-sm">
-                <thead className="bg-white dark:bg-slate-900">
+              <table className="min-w-full text-sm text-slate-900 dark:text-slate-100">
+                <thead className="bg-white dark:bg-slate-900 dark:text-slate-100">
                   <tr className="border-b">
                     <th className="px-4 py-2 text-left">Done</th>
                     <th className="px-4 py-2 text-left">Day</th>
@@ -228,7 +228,7 @@ export default function MemorizationPlanner() {
                     <th className="px-4 py-2 text-left">Old Revision (7-day cycle)</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="dark:text-slate-100">
                   {week.days.map((d, idx) => {
                     const key = `${week.week}-${idx}`;
                     const checked = !!state.completed[key];
