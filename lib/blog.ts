@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { Redis } from "@upstash/redis";
 
 export interface BlogComment {
   name: string;
@@ -22,6 +23,35 @@ export interface BlogPost {
 }
 
 const BLOG_FILE_CANDIDATES = ["blog.json", path.join("data", "blog.json")];
+const BLOG_REACTIONS_KEY_PREFIX = "blog:reactions:";
+const BLOG_COMMENTS_KEY_PREFIX = "blog:comments:";
+
+let redisClient: Redis | null | undefined;
+
+function getRedisClient(): Redis | null {
+  if (redisClient !== undefined) {
+    return redisClient;
+  }
+
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  if (!url || !token) {
+    redisClient = null;
+    return redisClient;
+  }
+
+  redisClient = new Redis({ url, token });
+  return redisClient;
+}
+
+function reactionsKey(slug: string): string {
+  return `${BLOG_REACTIONS_KEY_PREFIX}${slug}`;
+}
+
+function commentsKey(slug: string): string {
+  return `${BLOG_COMMENTS_KEY_PREFIX}${slug}`;
+}
 
 export interface BlogPostInput {
   title: string;
@@ -167,6 +197,82 @@ function asReactions(value: unknown): Record<string, number> {
   return out;
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return !!value && typeof value === "object" && !Array.isArray(value);
+}
+
+function normalizeComments(value: unknown): BlogComment[] {
+  if (!Array.isArray(value)) return [];
+  return value.map(normalizeComment).filter((x): x is BlogComment => !!x);
+}
+
+async function getStoredReactions(slug: string): Promise<Record<string, number> | null> {
+  const redis = getRedisClient();
+  if (!redis) return null;
+
+  try {
+    const value = await redis.get(reactionsKey(slug));
+    if (!isRecord(value)) return null;
+    return asReactions(value);
+  } catch (error) {
+    console.error(`Failed to read reactions for post ${slug}:`, error);
+    return null;
+  }
+}
+
+async function getStoredComments(slug: string): Promise<BlogComment[] | null> {
+  const redis = getRedisClient();
+  if (!redis) return null;
+
+  try {
+    const value = await redis.get(commentsKey(slug));
+    if (!Array.isArray(value)) return null;
+    return normalizeComments(value);
+  } catch (error) {
+    console.error(`Failed to read comments for post ${slug}:`, error);
+    return null;
+  }
+}
+
+async function setStoredReactions(slug: string, reactions: Record<string, number>): Promise<void> {
+  const redis = getRedisClient();
+  if (!redis) return;
+  await redis.set(reactionsKey(slug), reactions);
+}
+
+async function setStoredComments(slug: string, comments: BlogComment[]): Promise<void> {
+  const redis = getRedisClient();
+  if (!redis) return;
+  await redis.set(commentsKey(slug), comments);
+}
+
+async function renameStoredPostState(fromSlug: string, toSlug: string): Promise<void> {
+  if (fromSlug === toSlug) return;
+  const redis = getRedisClient();
+  if (!redis) return;
+
+  const [reactions, comments] = await Promise.all([
+    redis.get(reactionsKey(fromSlug)),
+    redis.get(commentsKey(fromSlug)),
+  ]);
+
+  if (reactions) {
+    await redis.set(reactionsKey(toSlug), reactions);
+    await redis.del(reactionsKey(fromSlug));
+  }
+
+  if (comments) {
+    await redis.set(commentsKey(toSlug), comments);
+    await redis.del(commentsKey(fromSlug));
+  }
+}
+
+async function deleteStoredPostState(slug: string): Promise<void> {
+  const redis = getRedisClient();
+  if (!redis) return;
+  await Promise.all([redis.del(reactionsKey(slug)), redis.del(commentsKey(slug))]);
+}
+
 function normalizeComment(value: unknown): BlogComment | null {
   if (!value || typeof value !== "object") return null;
   const row = value as Record<string, unknown>;
@@ -224,8 +330,29 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     .filter((x): x is BlogPost => !!x)
     .sort((a, b) => +new Date(b.date) - +new Date(a.date));
 
-  const withResolvedImages = await Promise.all(
+  const withPersistedState = await Promise.all(
     normalized.map(async (post) => {
+      const [storedReactions, storedComments] = await Promise.all([
+        getStoredReactions(post.slug),
+        getStoredComments(post.slug),
+      ]);
+
+      const comments = storedComments ?? post.comments;
+      const reactions = {
+        ...(storedReactions ?? post.reactions),
+        comment: comments.length,
+      };
+
+      return {
+        ...post,
+        comments,
+        reactions,
+      };
+    }),
+  );
+
+  const withResolvedImages = await Promise.all(
+    withPersistedState.map(async (post) => {
       const [image, content] = await Promise.all([
         resolvePostImage(post.image),
         normalizeInlineImages(post.content),
@@ -270,6 +397,10 @@ export async function createBlogPost(input: BlogPostInput): Promise<BlogPost> {
 
   posts.unshift(created);
   await writeRawPosts(posts);
+  await Promise.all([
+    setStoredReactions(created.slug, created.reactions),
+    setStoredComments(created.slug, created.comments),
+  ]);
   return created;
 }
 
@@ -301,15 +432,20 @@ export async function updateBlogPost(
 
   posts[index] = next;
   await writeRawPosts(posts);
+  await renameStoredPostState(current.slug, slug);
   return next;
 }
 
 export async function deleteBlogPost(id: string): Promise<boolean> {
   const posts = await getAllPosts();
+  const deleted = posts.find((post) => post.id === id);
   const next = posts.filter((post) => post.id !== id);
   if (next.length === posts.length) return false;
 
   await writeRawPosts(next);
+  if (deleted) {
+    await deleteStoredPostState(deleted.slug);
+  }
   return true;
 }
 
@@ -317,34 +453,47 @@ export async function incrementPostReaction(
   slug: string,
   reaction: BlogReactionType,
 ): Promise<Record<string, number> | null> {
+  const post = await getPostBySlug(slug);
+  if (!post) return null;
+
+  const nextReactions = {
+    ...post.reactions,
+    [reaction]: (Number(post.reactions?.[reaction]) || 0) + 1,
+    comment: Number(post.reactions?.comment) || post.comments.length,
+  };
+
+  if (getRedisClient()) {
+    await setStoredReactions(slug, nextReactions);
+    return nextReactions;
+  }
+
   const posts = await getAllPosts();
   const index = posts.findIndex((post) => post.slug === slug);
   if (index < 0) return null;
 
   const current = posts[index];
-  const nextReactions = {
+  const fileReactions = {
     ...current.reactions,
     [reaction]: (Number(current.reactions?.[reaction]) || 0) + 1,
+    comment: Number(current.reactions?.comment) || current.comments.length,
   };
 
   posts[index] = {
     ...current,
-    reactions: nextReactions,
+    reactions: fileReactions,
   };
 
   await writeRawPosts(posts);
-  return nextReactions;
+  return fileReactions;
 }
 
 export async function addCommentToPost(
   slug: string,
   input: BlogCommentInput,
 ): Promise<{ comments: BlogComment[]; reactions: Record<string, number> } | null> {
-  const posts = await getAllPosts();
-  const index = posts.findIndex((post) => post.slug === slug);
-  if (index < 0) return null;
+  const post = await getPostBySlug(slug);
+  if (!post) return null;
 
-  const current = posts[index];
   const commentText = input.text.trim();
   if (!commentText) return null;
 
@@ -356,23 +505,46 @@ export async function addCommentToPost(
     reactions: {},
   };
 
-  const nextComments = [...current.comments, nextComment];
+  const nextComments = [...post.comments, nextComment];
   const nextReactions = {
-    ...current.reactions,
+    ...post.reactions,
     comment: nextComments.length,
+  };
+
+  if (getRedisClient()) {
+    await Promise.all([
+      setStoredComments(slug, nextComments),
+      setStoredReactions(slug, nextReactions),
+    ]);
+
+    return {
+      comments: nextComments,
+      reactions: nextReactions,
+    };
+  }
+
+  const posts = await getAllPosts();
+  const index = posts.findIndex((post) => post.slug === slug);
+  if (index < 0) return null;
+
+  const current = posts[index];
+  const fileComments = [...current.comments, nextComment];
+  const fileReactions = {
+    ...current.reactions,
+    comment: fileComments.length,
   };
 
   posts[index] = {
     ...current,
-    comments: nextComments,
-    reactions: nextReactions,
+    comments: fileComments,
+    reactions: fileReactions,
   };
 
   await writeRawPosts(posts);
 
   return {
-    comments: nextComments,
-    reactions: nextReactions,
+    comments: fileComments,
+    reactions: fileReactions,
   };
 }
 
