@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { Suspense } from "react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
 import CookiePreferencesButton from "@/components/CookiePreferencesButton";
@@ -24,7 +25,11 @@ export default function RootLayout({
         suppressHydrationWarning
         className="min-h-screen bg-slate-50 text-slate-900 antialiased"
       >
-        {gaId && <GoogleAnalytics gaId={gaId} />}
+        {gaId && (
+          <Suspense fallback={null}>
+            <GoogleAnalytics gaId={gaId} />
+          </Suspense>
+        )}
         {gaId && <CookieConsentBanner />}
         <div className="flex min-h-screen flex-col">
           <main className="flex-1">{children}</main>
