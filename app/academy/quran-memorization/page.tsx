@@ -21,7 +21,7 @@ export default async function QuranMemorizationPage({ searchParams }: PageProps)
       <main className="mx-auto max-w-7xl px-6 py-16">
         <div className="mx-auto mb-8 max-w-3xl text-center">
           <h1 className="text-3xl font-bold md:text-4xl">Qur’an Memorization Planner</h1>
-          <p className="mt-3 text-gray-600">
+          <p className="mt-3 text-gray-700 dark:text-slate-200">
             Build a weekly-circle schedule for new memorization, new revision, and old revision.
           </p>
           <Link href="/academy" className="mt-4 inline-block text-sm font-medium text-blue-600">
@@ -31,7 +31,7 @@ export default async function QuranMemorizationPage({ searchParams }: PageProps)
 
         <section className="mx-auto mb-8 max-w-5xl rounded-xl border border-gray-200 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
           <h2 className="text-lg font-semibold">How it works</h2>
-          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-gray-700 dark:text-slate-200">
+          <ol className="mt-3 list-decimal space-y-2 pl-5 text-sm text-gray-800 dark:text-slate-100">
             <li>Set your total pages, current starting page, and old memorized pages.</li>
             <li>Choose how many new pages you want to memorize each day and how many weeks to generate.</li>
             <li>New revision runs in a circular cycle over the last 10 days of your new memorization.</li>
