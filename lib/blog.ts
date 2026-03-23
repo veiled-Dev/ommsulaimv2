@@ -43,7 +43,8 @@ function slugify(value: string): string {
     .trim()
     .replace(/[^a-z0-9\s-]/g, "")
     .replace(/\s+/g, "-")
-    .replace(/-+/g, "-");
+    .replace(/-+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
 function uniqueSlug(baseSlug: string, existing: Set<string>): string {
@@ -66,7 +67,13 @@ async function getWritableBlogFilePath(): Promise<string> {
 
 async function writeRawPosts(posts: BlogPost[]) {
   const filePath = await getWritableBlogFilePath();
-  await fs.writeFile(filePath, `${JSON.stringify(posts, null, 2)}\n`, "utf8");
+  try {
+    const jsonContent = JSON.stringify(posts, null, 2);
+    await fs.writeFile(filePath, `${jsonContent}\n`, "utf8");
+  } catch (error) {
+    console.error(`Failed to write blog posts to ${filePath}:`, error);
+    throw new Error(`Failed to save blog data: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
 }
 
 async function fileExists(filePath: string): Promise<boolean> {
