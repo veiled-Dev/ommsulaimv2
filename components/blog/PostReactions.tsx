@@ -94,7 +94,22 @@ export default function PostReactions({ slug, initialReactions, initialCommentsC
         localStorage.setItem(`ommsulaim:shared:${slug}`, "1");
       }
     } catch {
-      setFeedback("Action could not be completed. Please try again.");
+      setReactions((prev) => ({
+        ...prev,
+        [type]: (Number(prev[type]) || 0) + 1,
+      }));
+
+      if (type === "heart") {
+        setLiked(true);
+        localStorage.setItem(`ommsulaim:liked:${slug}`, "1");
+      }
+
+      if (type === "share") {
+        setShared(true);
+        localStorage.setItem(`ommsulaim:shared:${slug}`, "1");
+      }
+
+      setFeedback("Saved on this device.");
     } finally {
       setBusy(null);
     }
