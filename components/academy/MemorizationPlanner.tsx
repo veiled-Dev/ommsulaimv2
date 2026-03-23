@@ -92,15 +92,47 @@ export default function MemorizationPlanner() {
   const doneDays = Object.values(state.completed).filter(Boolean).length;
   const progressPct = totalDays === 0 ? 0 : Math.round((doneDays / totalDays) * 100);
 
+  const orderedDayKeys = useMemo(() => {
+    const keys: string[] = [];
+    schedule.forEach((week) => {
+      week.days.forEach((_, idx) => {
+        keys.push(`${week.week}-${idx}`);
+      });
+    });
+    return keys;
+  }, [schedule]);
+
   const setNumeric = (key: keyof PlannerState, value: number) => {
     setState((prev) => ({ ...prev, [key]: value }));
   };
 
   const toggleDone = (key: string, checked: boolean) => {
-    setState((prev) => ({
-      ...prev,
-      completed: { ...prev.completed, [key]: checked },
-    }));
+    setState((prev) => {
+      const dayIndex = orderedDayKeys.indexOf(key);
+      if (dayIndex === -1) return prev;
+
+      const completed = { ...prev.completed };
+
+      if (checked) {
+        if (dayIndex > 0) {
+          const previousKey = orderedDayKeys[dayIndex - 1];
+          if (!completed[previousKey]) {
+            return prev;
+          }
+        }
+
+        completed[key] = true;
+      } else {
+        for (let i = dayIndex; i < orderedDayKeys.length; i += 1) {
+          delete completed[orderedDayKeys[i]];
+        }
+      }
+
+      return {
+        ...prev,
+        completed,
+      };
+    });
   };
 
   const clearChecks = () => {
@@ -115,7 +147,7 @@ export default function MemorizationPlanner() {
 
   return (
     <section className="space-y-8">
-      <div className="grid gap-4 rounded-xl border border-gray-200 bg-white p-5 md:grid-cols-2 dark:border-slate-700 dark:bg-slate-900">
+      <div className="grid gap-4 rounded-xl border border-gray-200 bg-white p-5 text-gray-800 md:grid-cols-2 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100">
         <label className="text-sm">
           <span className="mb-1 block font-medium">Total Qur’an pages</span>
           <input
@@ -160,7 +192,7 @@ export default function MemorizationPlanner() {
             onChange={(e) => setNumeric("pagesPerDayNew", Math.max(1, Number(e.target.value)))}
             className="w-full rounded-lg border border-gray-300 px-3 py-2 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100"
           />
-          <span className="mt-1 block text-xs text-gray-500 dark:text-slate-400">
+          <span className="mt-1 block text-xs text-gray-600 dark:text-slate-300">
             This value sets how much of your recent new hifz rotates in the 10-day new-revision circle each day.
           </span>
         </label>
@@ -183,7 +215,7 @@ export default function MemorizationPlanner() {
           <p>New revision cycle: <strong>last 10 days (circular)</strong></p>
           <p>Old revision cycle: <strong>completed every 7 days</strong></p>
           <p>Progress: <strong>{doneDays}/{totalDays}</strong> days ({progressPct}%)</p>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-gray-600 dark:text-slate-300">
             {hydrated ? "Auto-saved locally." : "Loading saved progress..."}
             {lastSaved ? ` Last save: ${new Date(lastSaved).toLocaleString()}` : ""}
           </p>
@@ -218,26 +250,30 @@ export default function MemorizationPlanner() {
           <div key={week.week} className="overflow-hidden rounded-xl border border-gray-200 dark:border-slate-700">
             <div className="bg-gray-50 px-4 py-2 text-sm font-semibold dark:bg-slate-800 dark:text-slate-100">Week {week.week}</div>
             <div className="overflow-x-auto">
-              <table className="min-w-full text-sm text-slate-900 dark:text-slate-100">
-                <thead className="bg-white dark:bg-slate-900 dark:text-slate-100">
-                  <tr className="border-b">
-                    <th className="px-4 py-2 text-left">Done</th>
-                    <th className="px-4 py-2 text-left">Day</th>
-                    <th className="px-4 py-2 text-left">New Memorization</th>
-                    <th className="px-4 py-2 text-left">New Revision (10-day circle)</th>
-                    <th className="px-4 py-2 text-left">Old Revision (7-day cycle)</th>
+              <table className="min-w-full text-sm">
+                <thead className="bg-white dark:bg-slate-900">
+                  <tr className="border-b text-slate-800 dark:text-slate-100">
+                    <th className="px-4 py-2 text-left font-semibold">Done</th>
+                    <th className="px-4 py-2 text-left font-semibold">Day</th>
+                    <th className="px-4 py-2 text-left font-semibold">New Memorization</th>
+                    <th className="px-4 py-2 text-left font-semibold">New Revision (10-day circle)</th>
+                    <th className="px-4 py-2 text-left font-semibold">Old Revision (7-day cycle)</th>
                   </tr>
                 </thead>
-                <tbody className="dark:text-slate-100">
+                <tbody>
                   {week.days.map((d, idx) => {
                     const key = `${week.week}-${idx}`;
                     const checked = !!state.completed[key];
+                    const dayIndex = orderedDayKeys.indexOf(key);
+                    const previousKey = dayIndex > 0 ? orderedDayKeys[dayIndex - 1] : undefined;
+                    const canCheck = dayIndex === 0 || (!!previousKey && !!state.completed[previousKey]);
                     return (
                       <tr key={key} className="border-b last:border-0 dark:border-slate-700">
                         <td className="px-4 py-2">
                           <input
                             type="checkbox"
                             checked={checked}
+                            disabled={!checked && !canCheck}
                             onChange={(e) => toggleDone(key, e.target.checked)}
                           />
                         </td>
