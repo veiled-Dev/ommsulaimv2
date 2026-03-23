@@ -1,11 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
-
-const CONSENT_KEY = "ommsulaim:analytics-consent";
 
 declare global {
   interface Window {
@@ -21,32 +18,9 @@ type Props = {
 export default function GoogleAnalytics({ gaId }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [isConsentGranted, setIsConsentGranted] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const syncConsent = () => {
-      setIsConsentGranted(window.localStorage.getItem(CONSENT_KEY) === "granted");
-    };
-
-    syncConsent();
-    window.addEventListener("storage", syncConsent);
-    window.addEventListener("ommsulaim:analytics-consent-changed", syncConsent);
-
-    return () => {
-      window.removeEventListener("storage", syncConsent);
-      window.removeEventListener("ommsulaim:analytics-consent-changed", syncConsent);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (
-      !gaId ||
-      !isConsentGranted ||
-      typeof window === "undefined" ||
-      typeof window.gtag !== "function"
-    ) {
+    if (!gaId || typeof window === "undefined" || typeof window.gtag !== "function") {
       return;
     }
 
@@ -58,9 +32,7 @@ export default function GoogleAnalytics({ gaId }: Props) {
       page_location: window.location.href,
       page_title: document.title,
     });
-  }, [gaId, isConsentGranted, pathname, searchParams]);
-
-  if (!isConsentGranted) return null;
+  }, [gaId, pathname, searchParams]);
 
   return (
     <>

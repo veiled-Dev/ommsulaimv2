@@ -4,8 +4,6 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
-import CookieConsentBanner from "@/components/CookieConsentBanner";
-import CookiePreferencesButton from "@/components/CookiePreferencesButton";
 
 export const metadata: Metadata = {
   title: "OmmSulaim Digital Services Ltd",
@@ -30,7 +28,6 @@ export default function RootLayout({
             <GoogleAnalytics gaId={gaId} />
           </Suspense>
         )}
-        {gaId && <CookieConsentBanner />}
         <div className="flex min-h-screen flex-col">
           <main className="flex-1">{children}</main>
 
@@ -44,12 +41,6 @@ export default function RootLayout({
               <Link href="/privacy-policy" className="hover:text-amber-700">
                 Privacy Policy
               </Link>
-              {gaId && (
-                <>
-                  <span className="mx-2">|</span>
-                  <CookiePreferencesButton />
-                </>
-              )}
             </p>
           </footer>
         </div>
