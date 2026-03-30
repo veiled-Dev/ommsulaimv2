@@ -10,11 +10,10 @@ export default function HomePage() {
         {/* Hero */}
         <section className="text-center max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Faith-Centred Education and Digital Solutions
+            Digital Solutions for Learning, Growth, and Online Presence
           </h1>
           <p className="mt-6 text-lg text-gray-600">
-            OmmSulaim Digital Services Ltd provides online learning, digital resources, 
-            and modern web solutions designed to support purposeful growth.
+            OmmSulaim Digital Services Ltd is a digital solutions company focused on building structured learning systems, developing educational resources, and providing practical web solutions.
           </p>
           <div className="mt-10 flex justify-center gap-4">
             <Link
@@ -36,8 +35,13 @@ export default function HomePage() {
         <section className="mt-24 max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-semibold">About OmmSulaim</h2>
           <p className="mt-4 text-gray-600">
-            OmmSulaim Digital Services Ltd is a registered company focused on education, 
-            digital learning, and practical technology services.
+            OmmSulaim Digital Services Ltd is a registered digital services company with a focus on education technology, digital learning, and practical web solutions.
+          </p>
+          <p className="mt-4 text-gray-600">
+            The company develops structured systems, resources, and platforms designed to support effective learning and a functional online presence.
+          </p>
+          <p className="mt-4 text-gray-600">
+            We focus on creating simple, structured, and accessible digital systems that solve real learning and operational needs.
           </p>
           <Link
             href="/about"
@@ -45,6 +49,16 @@ export default function HomePage() {
           >
             Learn More
           </Link>
+        </section>
+
+        {/* Focus Areas */}
+        <section className="mt-24 max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl font-semibold">Our Focus Areas</h2>
+          <ul className="mt-6 space-y-2 text-gray-700">
+            <li>Education Technology (EdTech)</li>
+            <li>Digital Learning Systems</li>
+            <li>Web &amp; Online Solutions</li>
+          </ul>
         </section>
 
         {/* Services Preview */}
@@ -55,27 +69,27 @@ export default function HomePage() {
               href="/academy"
               className="rounded-lg border border-slate-200 bg-white p-6 transition hover:border-amber-300 hover:shadow-md"
             >
-              <h3 className="text-xl font-medium mb-2">Education & Learning</h3>
+              <h3 className="text-xl font-medium mb-2">Education Platforms</h3>
               <p className="text-gray-600">
-                Structured Qur’an learning and educational programs for all ages.
+                Development and delivery of structured learning programs through dedicated platforms such as OmmSulaim Academy.
               </p>
             </Link>
             <Link
               href="/coming-soon"
               className="rounded-lg border border-slate-200 bg-white p-6 transition hover:border-amber-300 hover:shadow-md"
             >
-              <h3 className="text-xl font-medium mb-2">Digital Products</h3>
+              <h3 className="text-xl font-medium mb-2">Digital Learning Resources</h3>
               <p className="text-gray-600">
-                Ebooks and curated learning resources for self-study and growth.
+                Creation of digital products and materials designed to support structured education, independent study, and consistent learning.
               </p>
             </Link>
             <Link
               href="/services"
               className="rounded-lg border border-slate-200 bg-white p-6 transition hover:border-amber-300 hover:shadow-md"
             >
-              <h3 className="text-xl font-medium mb-2">Web & Tech Services</h3>
+              <h3 className="text-xl font-medium mb-2">Web &amp; Digital Solutions</h3>
               <p className="text-gray-600">
-                Website design, consultancy, and simple digital solutions for small businesses.
+                Website development, setup, and consultancy services to help individuals and small organizations establish and manage their online presence.
               </p>
             </Link>
           </div>
@@ -85,7 +99,7 @@ export default function HomePage() {
         <section className="mt-24 max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-semibold">Shop</h2>
           <p className="mt-4 text-gray-600">
-            Explore curated resources and lifestyle essentials to support learning and growth.
+            Access digital resources and tools developed to support learning, organization, and personal growth.
           </p>
           <Link
             href="/coming-soon"
@@ -97,19 +111,16 @@ export default function HomePage() {
 
         {/* Call to Action */}
         <section className="mt-24 rounded-lg border border-slate-200 bg-white py-16 text-center">
-          <h2 className="text-3xl font-semibold">Ready to start?</h2>
-          <div className="mt-6 flex justify-center gap-4">
+          <h2 className="text-3xl font-semibold">OmmSulaim Academy</h2>
+          <p className="mt-4 text-gray-600">
+            Our dedicated learning platform for Qur&#39;an and Arabic education.
+          </p>
+          <div className="mt-6 flex justify-center">
             <Link
               href="/academy"
               className="rounded-lg bg-sky-700 px-6 py-3 text-sm font-medium text-white transition hover:bg-sky-800"
             >
-              Join the Academy
-            </Link>
-            <Link
-              href="/contact"
-              className="rounded-lg border border-amber-400 bg-white px-6 py-3 text-sm font-medium text-slate-900 transition hover:bg-amber-50"
-            >
-              Contact Us
+              Explore the Academy
             </Link>
           </div>
         </section>
