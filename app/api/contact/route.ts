@@ -31,6 +31,7 @@ export async function POST(req: Request) {
     await transporter.sendMail({
       from: SMTP_FROM || SMTP_USER,
       to: "support@ommsulaim.com",
+      cc: "ommsulaim@gmail.com",
       replyTo: email,
       subject: `Contact Form: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`,
