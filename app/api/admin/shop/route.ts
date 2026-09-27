@@ -5,7 +5,7 @@ import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 export const runtime = "nodejs";
 
-const validCategories: ShopCategory[] = ["digital-products", "clothing", "accessories"];
+const validCategories: ShopCategory[] = ["digital-products"];
 
 async function ensureAdmin() {
   const cookieStore = await cookies();
@@ -35,15 +35,17 @@ export async function POST(req: Request) {
   const category = parseCategory(body.category);
   const title = String(body.title ?? "").trim();
   const description = String(body.description ?? "").trim();
+  const access = body.access === "free" ? "free" : "paid";
   const price = String(body.price ?? "").trim();
   const buyLink = String(body.buyLink ?? "").trim() || "/contact";
 
-  if (!category || !title || !description || !price) {
-    return NextResponse.json({ error: "Category, title, description, and price are required." }, { status: 400 });
+  if (!category || !title || !description || (access === "paid" && !price)) {
+    return NextResponse.json({ error: access === "paid" ? "Category, title, description, and price are required for paid products." : "Category, title, and description are required for free resources." }, { status: 400 });
   }
 
   const product = await createShopProduct({
     category,
+    access,
     title,
     description,
     price,
