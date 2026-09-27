@@ -198,8 +198,8 @@ export default function MemorizationPlanner() {
         </div>
 
         <div className="grid gap-5 p-5 md:grid-cols-2 md:p-6">
-          <label className="block text-sm">
-            <span className="mb-2 block text-base font-semibold">Total Qur’an pages</span>
+          <label className="block text-sm text-white">
+            <span className="mb-2 block text-base font-semibold text-white">Total Qur’an pages</span>
             <input
               type="number"
               min={1}
@@ -212,8 +212,8 @@ export default function MemorizationPlanner() {
             </span>
           </label>
 
-          <label className="block text-sm">
-            <span className="mb-2 block text-base font-semibold">Starting page for new Hifz</span>
+          <label className="block text-sm text-white">
+            <span className="mb-2 block text-base font-semibold text-white">Starting page for new Hifz</span>
             <input
               type="number"
               min={1}
@@ -227,8 +227,8 @@ export default function MemorizationPlanner() {
             </span>
           </label>
 
-          <label className="block text-sm">
-            <span className="mb-2 block text-base font-semibold">Pages already memorized</span>
+          <label className="block text-sm text-white">
+            <span className="mb-2 block text-base font-semibold text-white">Pages already memorized</span>
             <input
               type="number"
               min={0}
@@ -242,8 +242,8 @@ export default function MemorizationPlanner() {
             </span>
           </label>
 
-          <label className="block text-sm">
-            <span className="mb-2 block text-base font-semibold">New pages per day</span>
+          <label className="block text-sm text-white">
+            <span className="mb-2 block text-base font-semibold text-white">New pages per day</span>
             <input
               type="number"
               min={1}
@@ -256,8 +256,8 @@ export default function MemorizationPlanner() {
             </span>
           </label>
 
-          <label className="block text-sm">
-            <span className="mb-2 block text-base font-semibold">Older revision pages per day</span>
+          <label className="block text-sm text-white">
+            <span className="mb-2 block text-base font-semibold text-white">Older revision pages per day</span>
             <input
               type="number"
               min={1}
@@ -273,8 +273,8 @@ export default function MemorizationPlanner() {
             </span>
           </label>
 
-          <label className="block text-sm">
-            <span className="mb-2 block text-base font-semibold">Weeks to generate</span>
+          <label className="block text-sm text-white">
+            <span className="mb-2 block text-base font-semibold text-white">Weeks to generate</span>
             <input
               type="number"
               min={1}
@@ -387,11 +387,11 @@ export default function MemorizationPlanner() {
                 </colgroup>
                 <thead className="bg-slate-100 dark:bg-slate-800">
                   <tr className="border-b-2 border-slate-200 dark:border-slate-700">
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">Done</th>
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">Day</th>
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">New Memorization</th>
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">Recent Revision</th>
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">Older Revision</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">Done</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">Day</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">New Memorization</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">Recent Revision</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">Older Revision</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -422,7 +422,7 @@ export default function MemorizationPlanner() {
                             className="h-5 w-5 rounded"
                           />
                         </td>
-                        <td className="px-5 py-5 align-top font-bold">{d.dayLabel}</td>
+                        <td className="px-5 py-5 align-top font-bold text-slate-100">{d.dayLabel}</td>
                         <td className="px-5 py-5 align-top font-medium leading-7 text-slate-100 dark:text-slate-100">{d.newMemorization}</td>
                         <td className="px-5 py-5 align-top font-medium leading-7 text-slate-100 dark:text-slate-100">{d.newRevision}</td>
                         <td className="px-5 py-5 align-top font-medium leading-7 text-slate-100 dark:text-slate-100">{d.oldRevision}</td>
