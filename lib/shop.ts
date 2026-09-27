@@ -1,11 +1,13 @@
 import { promises as fs } from "fs";
 import path from "path";
 
-export type ShopCategory = "digital-products" | "clothing" | "accessories";
+export type ShopCategory = "digital-products";
+export type ShopAccess = "paid" | "free";
 
 export interface ShopProduct {
   id: string;
   category: ShopCategory;
+  access: ShopAccess;
   title: string;
   description: string;
   price: string;
@@ -13,10 +15,14 @@ export interface ShopProduct {
 }
 
 const SHOP_FILE = path.join(process.cwd(), "shop.json");
-const SHOP_CATEGORIES: ShopCategory[] = ["digital-products", "clothing", "accessories"];
+const SHOP_CATEGORIES: ShopCategory[] = ["digital-products"];
 
 function asString(value: unknown, fallback = ""): string {
   return typeof value === "string" ? value : fallback;
+}
+
+function asAccess(value: unknown): ShopAccess {
+  return value === "free" ? "free" : "paid";
 }
 
 function asCategory(value: unknown): ShopCategory {
@@ -71,7 +77,8 @@ export async function createShopProduct(
   const products = await getAllShopProducts();
   const created: ShopProduct = {
     id: crypto.randomUUID(),
-    category: input.category,
+    category: "digital-products",
+    access: input.access,
     title: input.title.trim(),
     description: input.description.trim(),
     price: input.price.trim(),
@@ -94,7 +101,8 @@ export async function updateShopProduct(
   const current = products[index];
   const next: ShopProduct = {
     ...current,
-    category: updates.category ?? current.category,
+    category: "digital-products",
+    access: updates.access ?? current.access,
     title: updates.title?.trim() ?? current.title,
     description: updates.description?.trim() ?? current.description,
     price: updates.price?.trim() ?? current.price,
