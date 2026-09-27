@@ -32,7 +32,7 @@ export default function HomePage() {
             </Link>
 
             <Link
-              href="/academy/quran-memorization?entry=academy"
+              href="/academy/quran-memorization"
               className="rounded-lg border border-amber-400 bg-white px-6 py-3 text-sm font-medium text-slate-900 transition hover:bg-amber-50"
             >
               Try the Free Hifz Planner
@@ -76,7 +76,7 @@ export default function HomePage() {
             </Link>
 
             <Link
-              href="/academy/quran-memorization?entry=academy"
+              href="/academy/quran-memorization"
               className="group rounded-2xl border border-slate-200 bg-white p-8 transition hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg"
             >
               <p className="text-sm font-semibold text-amber-600">
@@ -174,7 +174,7 @@ export default function HomePage() {
             </p>
 
             <Link
-              href="/academy/quran-memorization?entry=academy"
+              href="/academy/quran-memorization"
               className="mt-8 inline-block rounded-lg bg-sky-700 px-7 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-sky-800"
             >
               Try the Free Hifz Planner
