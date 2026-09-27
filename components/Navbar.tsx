@@ -30,16 +30,7 @@ export default function Navbar() {
           <li><Link href="/" className="hover:text-sky-600 transition-colors duration-300">Home</Link></li>
           <li><Link href="/about" className="hover:text-sky-600 transition-colors duration-300">About</Link></li>
           <li><Link href="/services" className="hover:text-sky-600 transition-colors duration-300">Services</Link></li>
-          <li className="relative group">
-            <Link href="/coming-soon" className="hover:text-amber-500 cursor-pointer transition-colors duration-300">
-              Shop
-            </Link>
-            <ul className="absolute left-0 mt-2 w-48 rounded-md bg-white/95 shadow-lg ring-1 ring-sky-100 opacity-0 invisible transition-all duration-300 group-hover:visible group-hover:opacity-100">
-              <li><Link href="/coming-soon" className="block px-4 py-2 hover:bg-sky-50">Digital Products</Link></li>
-              <li><Link href="/coming-soon" className="block px-4 py-2 hover:bg-sky-50">Clothing</Link></li>
-              <li><Link href="/coming-soon" className="block px-4 py-2 hover:bg-sky-50">Accessories</Link></li>
-            </ul>
-          </li>
+          <li><Link href="/shop" className="hover:text-sky-600 transition-colors duration-300">Shop</Link></li>
           <li><Link href="/academy" className="hover:text-sky-600 transition-colors duration-300">Academy</Link></li>
           <li><Link href="/blog" className="hover:text-sky-600 transition-colors duration-300">Blog</Link></li>
           <li><Link href="/contact" className="hover:text-sky-600 transition-colors duration-300">Contact</Link></li>
@@ -62,9 +53,7 @@ export default function Navbar() {
             <li><Link href="/" onClick={toggleMobile}>Home</Link></li>
             <li><Link href="/about" onClick={toggleMobile}>About</Link></li>
             <li><Link href="/services" onClick={toggleMobile}>Services</Link></li>
-            <li><Link href="/coming-soon" onClick={toggleMobile}>Digital Products</Link></li>
-            <li><Link href="/coming-soon" onClick={toggleMobile}>Clothing</Link></li>
-            <li><Link href="/coming-soon" onClick={toggleMobile}>Accessories</Link></li>
+            <li><Link href="/shop" onClick={toggleMobile}>Shop</Link></li>
             <li><Link href="/academy" onClick={toggleMobile}>Academy</Link></li>
             <li><Link href="/blog" onClick={toggleMobile}>Blog</Link></li>
             <li><Link href="/contact" onClick={toggleMobile}>Contact</Link></li>
