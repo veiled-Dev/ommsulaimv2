@@ -186,78 +186,78 @@ export default function MemorizationPlanner() {
         <div className="border-b border-slate-200 px-5 py-5 dark:border-slate-700 md:px-6">
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 className="text-xl font-bold text-white">Build your Hifz plan</h2>
-              <p className="mt-1 text-sm leading-6 text-slate-100 dark:text-white">
+              <h2 className="text-xl font-bold text-slate-900 dark:text-white">Build your Hifz plan</h2>
+              <p className="mt-1 text-sm leading-6 text-slate-700 dark:text-slate-200">
                 Adjust the numbers below and your weekly schedule will update automatically.
               </p>
             </div>
-            <p className="text-xs text-slate-100 dark:text-white">
+            <p className="text-xs text-slate-600 dark:text-slate-300">
               Changing a setting starts a fresh checklist.
             </p>
           </div>
         </div>
 
         <div className="grid gap-5 p-5 md:grid-cols-2 md:p-6">
-          <label className="block text-sm text-white">
-            <span className="mb-2 block text-base font-semibold text-white">Total Qur’an pages</span>
+          <label className="block text-sm text-slate-800 dark:text-slate-800">
+            <span className="mb-2 block text-base font-semibold text-slate-900 dark:text-white">Total Qur’an pages</span>
             <input
               type="number"
               min={1}
               value={state.totalPages}
               onChange={(e) => setNumeric("totalPages", Number(e.target.value))}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-100 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-2 block text-sm leading-5 text-slate-100 dark:text-white">
+            <span className="mt-2 block text-sm leading-5 text-slate-600 dark:text-slate-300">
               A standard Madinah Mushaf is often planned as 604 pages. Change this if your Mushaf differs.
             </span>
           </label>
 
-          <label className="block text-sm text-white">
-            <span className="mb-2 block text-base font-semibold text-white">Starting page for new Hifz</span>
+          <label className="block text-sm text-slate-800 dark:text-slate-800">
+            <span className="mb-2 block text-base font-semibold text-slate-900 dark:text-white">Starting page for new Hifz</span>
             <input
               type="number"
               min={1}
               max={state.totalPages + 1}
               value={state.startingPage}
               onChange={(e) => setNumeric("startingPage", Number(e.target.value))}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-100 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-2 block text-sm leading-5 text-slate-100 dark:text-white">
+            <span className="mt-2 block text-sm leading-5 text-slate-600 dark:text-slate-300">
               Enter the page where you will begin your next new memorization.
             </span>
           </label>
 
-          <label className="block text-sm text-white">
-            <span className="mb-2 block text-base font-semibold text-white">Pages already memorized</span>
+          <label className="block text-sm text-slate-800 dark:text-slate-800">
+            <span className="mb-2 block text-base font-semibold text-slate-900 dark:text-white">Pages already memorized</span>
             <input
               type="number"
               min={0}
               max={state.totalPages}
               value={state.oldMemorizedPages}
               onChange={(e) => setOldMemorizedPages(Number(e.target.value))}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-100 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-2 block text-sm leading-5 text-slate-100 dark:text-white">
+            <span className="mt-2 block text-sm leading-5 text-slate-600 dark:text-slate-300">
               These pages form the starting pool for established revision. If your memorization is sequential, this will usually be the pages before your starting page.
             </span>
           </label>
 
-          <label className="block text-sm text-white">
-            <span className="mb-2 block text-base font-semibold text-white">New pages per day</span>
+          <label className="block text-sm text-slate-800 dark:text-slate-800">
+            <span className="mb-2 block text-base font-semibold text-slate-900 dark:text-white">New pages per day</span>
             <input
               type="number"
               min={1}
               value={state.pagesPerDayNew}
               onChange={(e) => setNumeric("pagesPerDayNew", Number(e.target.value))}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-100 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-2 block text-sm leading-5 text-slate-100 dark:text-white">
+            <span className="mt-2 block text-sm leading-5 text-slate-600 dark:text-slate-300">
               Your recent revision load is calculated from this new-memorization pace.
             </span>
           </label>
 
-          <label className="block text-sm text-white">
-            <span className="mb-2 block text-base font-semibold text-white">Older revision pages per day</span>
+          <label className="block text-sm text-slate-800 dark:text-slate-800">
+            <span className="mb-2 block text-base font-semibold text-slate-900 dark:text-white">Older revision pages per day</span>
             <input
               type="number"
               min={1}
@@ -266,30 +266,30 @@ export default function MemorizationPlanner() {
               onChange={(e) =>
                 setNumeric("olderRevisionPagesPerDay", Number(e.target.value))
               }
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-100 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-2 block text-sm leading-5 text-slate-100 dark:text-white">
+            <span className="mt-2 block text-sm leading-5 text-slate-600 dark:text-slate-300">
               Choose a manageable amount for established memorization. The planner estimates the rotation from this number.
             </span>
           </label>
 
-          <label className="block text-sm text-white">
-            <span className="mb-2 block text-base font-semibold text-white">Weeks to generate</span>
+          <label className="block text-sm text-slate-800 dark:text-slate-800">
+            <span className="mb-2 block text-base font-semibold text-slate-900 dark:text-white">Weeks to generate</span>
             <input
               type="number"
               min={1}
               max={52}
               value={state.weeks}
               onChange={(e) => setNumeric("weeks", Number(e.target.value))}
-              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-100 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-700 dark:focus:ring-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-700 dark:focus:ring-slate-700"
             />
-            <span className="mt-2 block text-sm leading-5 text-slate-100 dark:text-white">
+            <span className="mt-2 block text-sm leading-5 text-slate-600 dark:text-slate-300">
               Generate up to 52 weeks at a time.
             </span>
           </label>
 
-          <div className="rounded-2xl bg-slate-50 p-5 text-base dark:bg-slate-800/80 md:col-span-2">
-            <p className="font-bold">Your plan at a glance</p>
+          <div className="rounded-2xl bg-slate-50 p-5 text-base text-slate-800 dark:bg-slate-800/80 dark:text-slate-800 md:col-span-2">
+            <p className="font-bold text-slate-900 dark:text-white">Your plan at a glance</p>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
               <p>
                 New memorization: <strong>{weeklyNew} pages/week</strong>
@@ -307,8 +307,8 @@ export default function MemorizationPlanner() {
           </div>
 
           <div className="rounded-2xl border border-slate-200 p-5 text-base dark:border-slate-700 md:col-span-2">
-            <p className="font-bold text-white">How the revision logic works</p>
-            <ul className="mt-3 list-disc space-y-2 pl-5 leading-6 text-slate-100 dark:text-white">
+            <p className="font-bold text-slate-900 dark:text-white">How the revision logic works</p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 leading-6 text-slate-700 dark:text-slate-200">
               <li>New memorization moves forward page by page from your chosen starting point.</li>
               <li>Recent revision focuses on the pages you have memorized most recently and rotates them frequently while they are still fresh.</li>
               <li>Older revision maintains established memorization in manageable portions. As newer pages move out of the recent pool, they join this maintenance pool automatically.</li>
@@ -336,7 +336,7 @@ export default function MemorizationPlanner() {
               style={{ width: `${progressPct}%` }}
             />
           </div>
-          <p className="mt-2 text-sm text-slate-100 dark:text-white">
+          <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
             {hydrated ? "Saved automatically on this device." : "Loading your saved plan..."}
           </p>
         </div>
@@ -373,7 +373,7 @@ export default function MemorizationPlanner() {
           >
             <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-700 dark:bg-slate-800">
               <h3 className="text-lg font-bold">Week {week.week}</h3>
-              <span className="text-sm font-medium text-slate-100 dark:text-white">7-day plan</span>
+              <span className="text-sm font-medium text-slate-600 dark:text-slate-300">7-day plan</span>
             </div>
 
             <div className="overflow-x-auto">
@@ -387,11 +387,11 @@ export default function MemorizationPlanner() {
                 </colgroup>
                 <thead className="bg-slate-100 dark:bg-slate-800">
                   <tr className="border-b-2 border-slate-200 dark:border-slate-700">
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">Done</th>
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">Day</th>
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">New Memorization</th>
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">Recent Revision</th>
-                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-100">Older Revision</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-700 dark:text-slate-200">Done</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-700 dark:text-slate-200">Day</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-700 dark:text-slate-200">New Memorization</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-700 dark:text-slate-200">Recent Revision</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide text-slate-700 dark:text-slate-200">Older Revision</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -422,10 +422,10 @@ export default function MemorizationPlanner() {
                             className="h-5 w-5 rounded"
                           />
                         </td>
-                        <td className="px-5 py-5 align-top font-bold text-slate-100">{d.dayLabel}</td>
-                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-100 dark:text-slate-100">{d.newMemorization}</td>
-                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-100 dark:text-slate-100">{d.newRevision}</td>
-                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-100 dark:text-slate-100">{d.oldRevision}</td>
+                        <td className="px-5 py-5 align-top font-bold text-slate-800 dark:text-slate-800">{d.dayLabel}</td>
+                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-800 dark:text-slate-800">{d.newMemorization}</td>
+                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-800 dark:text-slate-800">{d.newRevision}</td>
+                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-800 dark:text-slate-800">{d.oldRevision}</td>
                       </tr>
                     );
                   })}
