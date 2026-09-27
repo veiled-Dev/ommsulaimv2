@@ -8,6 +8,7 @@ type PlannerState = {
   startingPage: number;
   oldMemorizedPages: number;
   pagesPerDayNew: number;
+  olderRevisionPagesPerDay: number;
   weeks: number;
   completed: Record<string, boolean>;
 };
@@ -19,6 +20,7 @@ const DEFAULT_STATE: PlannerState = {
   startingPage: 1,
   oldMemorizedPages: 0,
   pagesPerDayNew: 1,
+  olderRevisionPagesPerDay: 10,
   weeks: 4,
   completed: {},
 };
@@ -41,14 +43,41 @@ export default function MemorizationPlanner() {
         return;
       }
 
-      const parsed = JSON.parse(raw) as Partial<PlannerState> & { updatedAt?: string };
+      const parsed = JSON.parse(raw) as Partial<PlannerState> & {
+        updatedAt?: string;
+      };
 
       setState({
-        totalPages: Math.max(1, toNumber(parsed.totalPages, DEFAULT_STATE.totalPages)),
-        startingPage: Math.max(1, toNumber(parsed.startingPage, DEFAULT_STATE.startingPage)),
-        oldMemorizedPages: Math.max(0, toNumber(parsed.oldMemorizedPages, DEFAULT_STATE.oldMemorizedPages)),
-        pagesPerDayNew: Math.max(1, toNumber(parsed.pagesPerDayNew, DEFAULT_STATE.pagesPerDayNew)),
-        weeks: Math.max(1, Math.min(52, toNumber(parsed.weeks, DEFAULT_STATE.weeks))),
+        totalPages: Math.max(
+          1,
+          toNumber(parsed.totalPages, DEFAULT_STATE.totalPages)
+        ),
+        startingPage: Math.max(
+          1,
+          toNumber(parsed.startingPage, DEFAULT_STATE.startingPage)
+        ),
+        oldMemorizedPages: Math.max(
+          0,
+          toNumber(
+            parsed.oldMemorizedPages,
+            DEFAULT_STATE.oldMemorizedPages
+          )
+        ),
+        pagesPerDayNew: Math.max(
+          1,
+          toNumber(parsed.pagesPerDayNew, DEFAULT_STATE.pagesPerDayNew)
+        ),
+        olderRevisionPagesPerDay: Math.max(
+          1,
+          toNumber(
+            parsed.olderRevisionPagesPerDay,
+            DEFAULT_STATE.olderRevisionPagesPerDay
+          )
+        ),
+        weeks: Math.max(
+          1,
+          Math.min(52, toNumber(parsed.weeks, DEFAULT_STATE.weeks))
+        ),
         completed: parsed.completed ?? {},
       });
 
@@ -79,18 +108,36 @@ export default function MemorizationPlanner() {
         startingPage: state.startingPage,
         oldMemorizedPages: state.oldMemorizedPages,
         pagesPerDayNew: state.pagesPerDayNew,
+        olderRevisionPagesPerDay: state.olderRevisionPagesPerDay,
         weeks: state.weeks,
       }),
-    [state.totalPages, state.startingPage, state.oldMemorizedPages, state.pagesPerDayNew, state.weeks]
+    [
+      state.totalPages,
+      state.startingPage,
+      state.oldMemorizedPages,
+      state.pagesPerDayNew,
+      state.olderRevisionPagesPerDay,
+      state.weeks,
+    ]
   );
 
   const weeklyNew = state.pagesPerDayNew * 7;
-  const remaining = Math.max(0, state.totalPages - state.startingPage + 1);
-  const estWeeks = weeklyNew > 0 ? Math.ceil(remaining / weeklyNew) : 0;
+  const remaining = Math.max(
+    0,
+    state.totalPages - state.startingPage + 1
+  );
+  const estWeeks =
+    weeklyNew > 0 ? Math.ceil(remaining / weeklyNew) : 0;
 
-  const totalDays = schedule.reduce((acc, w) => acc + w.days.length, 0);
+  const totalDays = schedule.reduce(
+    (acc, w) => acc + w.days.length,
+    0
+  );
   const doneDays = Object.values(state.completed).filter(Boolean).length;
-  const progressPct = totalDays === 0 ? 0 : Math.min(100, Math.round((doneDays / totalDays) * 100));
+  const progressPct =
+    totalDays === 0
+      ? 0
+      : Math.min(100, Math.round((doneDays / totalDays) * 100));
 
   const orderedDayKeys = useMemo(() => {
     const keys: string[] = [];
@@ -102,9 +149,15 @@ export default function MemorizationPlanner() {
     return keys;
   }, [schedule]);
 
-  const setNumeric = (key: keyof Omit<PlannerState, "completed">, value: number) => {
+  const setNumeric = (
+    key: keyof Omit<PlannerState, "completed">,
+    value: number
+  ) => {
     setState((prev) => {
-      const safeValue = Number.isFinite(value) ? Math.max(1, Math.floor(value)) : prev[key];
+      const safeValue = Number.isFinite(value)
+        ? Math.max(1, Math.floor(value))
+        : prev[key];
+
       if (safeValue === prev[key]) return prev;
 
       return {
@@ -117,7 +170,10 @@ export default function MemorizationPlanner() {
 
   const setOldMemorizedPages = (value: number) => {
     setState((prev) => {
-      const safeValue = Number.isFinite(value) ? Math.max(0, Math.floor(value)) : prev.oldMemorizedPages;
+      const safeValue = Number.isFinite(value)
+        ? Math.max(0, Math.floor(value))
+        : prev.oldMemorizedPages;
+
       if (safeValue === prev.oldMemorizedPages) return prev;
 
       return {
@@ -186,7 +242,9 @@ export default function MemorizationPlanner() {
               type="number"
               min={1}
               value={state.totalPages}
-              onChange={(e) => setNumeric("totalPages", Number(e.target.value))}
+              onChange={(e) =>
+                setNumeric("totalPages", Number(e.target.value))
+              }
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
             <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
@@ -201,7 +259,9 @@ export default function MemorizationPlanner() {
               min={1}
               max={state.totalPages + 1}
               value={state.startingPage}
-              onChange={(e) => setNumeric("startingPage", Number(e.target.value))}
+              onChange={(e) =>
+                setNumeric("startingPage", Number(e.target.value))
+              }
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
             <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
@@ -216,11 +276,13 @@ export default function MemorizationPlanner() {
               min={0}
               max={state.totalPages}
               value={state.oldMemorizedPages}
-              onChange={(e) => setOldMemorizedPages(Number(e.target.value))}
+              onChange={(e) =>
+                setOldMemorizedPages(Number(e.target.value))
+              }
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
             <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
-              These pages form the pool for your older revision cycle.
+              These pages form the starting pool for established revision. If your memorization is sequential, this will usually be the pages before your starting page.
             </span>
           </label>
 
@@ -230,11 +292,33 @@ export default function MemorizationPlanner() {
               type="number"
               min={1}
               value={state.pagesPerDayNew}
-              onChange={(e) => setNumeric("pagesPerDayNew", Number(e.target.value))}
+              onChange={(e) =>
+                setNumeric("pagesPerDayNew", Number(e.target.value))
+              }
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
             <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
-              This also sets the daily amount used in the recent 10-day revision circle.
+              Your recent revision load is calculated from this new-memorization pace.
+            </span>
+          </label>
+
+          <label className="text-sm">
+            <span className="mb-1.5 block font-medium">Older revision pages per day</span>
+            <input
+              type="number"
+              min={1}
+              max={200}
+              value={state.olderRevisionPagesPerDay}
+              onChange={(e) =>
+                setNumeric(
+                  "olderRevisionPagesPerDay",
+                  Number(e.target.value)
+                )
+              }
+              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+            />
+            <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
+              Choose a manageable amount for established memorization. The planner estimates the rotation from this number.
             </span>
           </label>
 
@@ -253,14 +337,40 @@ export default function MemorizationPlanner() {
             </span>
           </label>
 
-          <div className="rounded-xl bg-slate-50 p-4 text-sm dark:bg-slate-800/80">
+          <div className="rounded-xl bg-slate-50 p-4 text-sm dark:bg-slate-800/80 md:col-span-2">
             <p className="font-semibold">Your plan at a glance</p>
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
-              <p>New memorization: <strong>{weeklyNew} pages/week</strong></p>
-              <p>Estimated finish: <strong>{estWeeks} weeks</strong></p>
-              <p>Recent revision: <strong>10-day circle</strong></p>
-              <p>Older revision: <strong>7-day cycle</strong></p>
+              <p>
+                New memorization: <strong>{weeklyNew} pages/week</strong>
+              </p>
+              <p>
+                Estimated finish: <strong>{estWeeks} weeks</strong>
+              </p>
+              <p>
+                Recent revision: <strong>frequent rotation of recent pages</strong>
+              </p>
+              <p>
+                Older revision: <strong>{state.olderRevisionPagesPerDay} pages/day</strong>
+              </p>
             </div>
+          </div>
+
+          <div className="rounded-xl border border-slate-200 p-4 text-sm dark:border-slate-700 md:col-span-2">
+            <p className="font-semibold">How the revision logic works</p>
+            <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-600 dark:text-slate-300">
+              <li>
+                New memorization moves forward page by page from your chosen starting point.
+              </li>
+              <li>
+                Recent revision focuses on the pages you have memorized most recently and rotates them frequently while they are still fresh.
+              </li>
+              <li>
+                Older revision maintains established memorization in manageable portions. As newer pages move out of the recent pool, they join this maintenance pool automatically.
+              </li>
+              <li>
+                The revision settings are a planning guide, not a fixed Hifz methodology. Adjust the load to what the student can maintain consistently.
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -268,18 +378,25 @@ export default function MemorizationPlanner() {
           <div className="flex items-center justify-between gap-4 text-sm">
             <div>
               <span className="font-semibold">Progress</span>
-              <span className="ml-2 text-slate-500 dark:text-slate-400">{doneDays} of {totalDays} days completed</span>
+              <span className="ml-2 text-slate-500 dark:text-slate-400">
+                {doneDays} of {totalDays} days completed
+              </span>
             </div>
             <span className="font-semibold">{progressPct}%</span>
           </div>
-          <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700" aria-label={`Hifz planner progress: ${progressPct}%`}>
+          <div
+            className="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
+            aria-label={`Hifz planner progress: ${progressPct}%`}
+          >
             <div
               className="h-full rounded-full bg-slate-900 transition-all dark:bg-white"
               style={{ width: `${progressPct}%` }}
             />
           </div>
           <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-            {hydrated ? "Saved automatically on this device." : "Loading your saved plan..."}
+            {hydrated
+              ? "Saved automatically on this device."
+              : "Loading your saved plan..."}
           </p>
         </div>
       </div>
@@ -309,10 +426,15 @@ export default function MemorizationPlanner() {
 
       <div className="space-y-6">
         {schedule.map((week) => (
-          <div key={week.week} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
+          <div
+            key={week.week}
+            className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900"
+          >
             <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-800">
               <h3 className="font-semibold">Week {week.week}</h3>
-              <span className="text-xs text-slate-500 dark:text-slate-400">7-day plan</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">
+                7-day plan
+              </span>
             </div>
             <div className="overflow-x-auto">
               <table className="min-w-[760px] w-full text-sm">
@@ -330,20 +452,27 @@ export default function MemorizationPlanner() {
                     const key = `${week.week}-${idx}`;
                     const checked = !!state.completed[key];
                     const dayIndex = orderedDayKeys.indexOf(key);
-                    const previousKey = dayIndex > 0 ? orderedDayKeys[dayIndex - 1] : undefined;
-                    const canCheck = dayIndex === 0 || (!!previousKey && !!state.completed[previousKey]);
+                    const previousKey =
+                      dayIndex > 0 ? orderedDayKeys[dayIndex - 1] : undefined;
+                    const canCheck =
+                      dayIndex === 0 ||
+                      (!!previousKey && !!state.completed[previousKey]);
 
                     return (
                       <tr
                         key={key}
-                        className={`border-b last:border-0 dark:border-slate-700 ${checked ? "bg-slate-50 dark:bg-slate-800/60" : ""}`}
+                        className={`border-b last:border-0 dark:border-slate-700 ${
+                          checked ? "bg-slate-50 dark:bg-slate-800/60" : ""
+                        }`}
                       >
                         <td className="px-4 py-3">
                           <input
                             type="checkbox"
                             checked={checked}
                             disabled={!checked && !canCheck}
-                            onChange={(e) => toggleDone(key, e.target.checked)}
+                            onChange={(e) =>
+                              toggleDone(key, e.target.checked)
+                            }
                             aria-label={`Mark Week ${week.week} ${d.dayLabel} complete`}
                             className="h-4 w-4"
                           />
