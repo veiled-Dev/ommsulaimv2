@@ -50,6 +50,7 @@ function normalizeProduct(value: unknown): ShopProduct | null {
   return {
     id: asString(row.id, crypto.randomUUID()),
     category: asCategory(row.category),
+    access: asAccess(row.access),
     title,
     description: asString(row.description),
     price: asString(row.price),
