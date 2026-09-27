@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 
 type Params = { params: Promise<{ id: string }> };
 
-const validCategories: ShopCategory[] = ["digital-products", "clothing", "accessories"];
+const validCategories: ShopCategory[] = ["digital-products"];
 
 async function ensureAdmin() {
   const cookieStore = await cookies();
@@ -26,9 +26,11 @@ export async function PATCH(req: Request, { params }: Params) {
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
+  const access = body.access === "free" ? "free" : body.access === "paid" ? "paid" : undefined;
 
   const product = await updateShopProduct(id, {
     category: parseCategory(body.category),
+    access,
     title: typeof body.title === "string" ? body.title : undefined,
     description: typeof body.description === "string" ? body.description : undefined,
     price: typeof body.price === "string" ? body.price : undefined,
