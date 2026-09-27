@@ -50,8 +50,8 @@ export default async function ShopPage() {
             </div>
           ) : (
             <div className="mt-10 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
-              <h3 className="text-xl font-semibold text-slate-950">New digital products are coming soon.</h3>
-              <p className="mx-auto mt-3 max-w-xl text-slate-600">We are preparing practical resources for learners, parents, teachers, and online educators.</p>
+              <h3 className="text-xl font-semibold text-slate-950">We’re building the first collection.</h3>
+              <p className="mx-auto mt-3 max-w-xl text-slate-600">Paid digital products will appear here as they are published. In the meantime, explore the free resources below.</p>
             </div>
           )}
         </section>
