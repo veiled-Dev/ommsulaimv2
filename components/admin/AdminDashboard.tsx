@@ -20,6 +20,7 @@ type BlogFormState = {
 type ProductFormState = {
   id: string | null;
   category: ShopCategory;
+  access: "paid" | "free";
   title: string;
   description: string;
   price: string;
@@ -37,6 +38,7 @@ const emptyBlogForm: BlogFormState = {
 const emptyProductForm: ProductFormState = {
   id: null,
   category: "digital-products",
+  access: "paid",
   title: "",
   description: "",
   price: "",
@@ -62,8 +64,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
   const productGroups = useMemo(() => {
     return {
       "digital-products": products.filter((product) => product.category === "digital-products"),
-      clothing: products.filter((product) => product.category === "clothing"),
-      accessories: products.filter((product) => product.category === "accessories"),
+      
     };
   }, [products]);
 
@@ -146,6 +147,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
     try {
       const payload = {
         category: productForm.category,
+        access: productForm.access,
         title: productForm.title,
         description: productForm.description,
         price: productForm.price,
@@ -455,8 +457,15 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
               className="w-full rounded-lg border border-slate-300 px-3 py-2"
             >
               <option value="digital-products">Digital Products</option>
-              <option value="clothing">Clothing</option>
-              <option value="accessories">Accessories</option>
+
+            </select>
+            <select
+              value={productForm.access}
+              onChange={(e) => setProductForm((prev) => ({ ...prev, access: e.target.value as "paid" | "free" }))}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2"
+            >
+              <option value="paid">Paid product</option>
+              <option value="free">Free resource</option>
             </select>
             <input
               required
@@ -477,7 +486,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
               required
               value={productForm.price}
               onChange={(e) => setProductForm((prev) => ({ ...prev, price: e.target.value }))}
-              placeholder="Price e.g ₦5,000"
+              placeholder="Price e.g ₦5,000 (not needed for free resources)"
               className="w-full rounded-lg border border-slate-300 px-3 py-2"
             />
             <input
@@ -563,6 +572,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
                             setProductForm({
                               id: product.id,
                               category: product.category,
+                              access: product.access,
                               title: product.title,
                               description: product.description,
                               price: product.price,
