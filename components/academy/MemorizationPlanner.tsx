@@ -186,7 +186,7 @@ export default function MemorizationPlanner() {
         <div className="border-b border-slate-200 px-5 py-5 dark:border-slate-700 md:px-6">
           <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
             <div>
-              <h2 className="text-xl font-bold">Build your Hifz plan</h2>
+              <h2 className="text-xl font-bold text-white">Build your Hifz plan</h2>
               <p className="mt-1 text-sm leading-6 text-slate-100 dark:text-white">
                 Adjust the numbers below and your weekly schedule will update automatically.
               </p>
@@ -307,7 +307,7 @@ export default function MemorizationPlanner() {
           </div>
 
           <div className="rounded-2xl border border-slate-200 p-5 text-base dark:border-slate-700 md:col-span-2">
-            <p className="font-bold">How the revision logic works</p>
+            <p className="font-bold text-white">How the revision logic works</p>
             <ul className="mt-3 list-disc space-y-2 pl-5 leading-6 text-slate-100 dark:text-white">
               <li>New memorization moves forward page by page from your chosen starting point.</li>
               <li>Recent revision focuses on the pages you have memorized most recently and rotates them frequently while they are still fresh.</li>
