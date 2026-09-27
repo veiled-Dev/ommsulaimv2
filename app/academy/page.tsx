@@ -1,132 +1,179 @@
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
+const enrolUrl = "https://forms.gle/Tzvw6uvPqZfYab7e7";
+
 export default function AcademyPage() {
   return (
     <>
       <Navbar />
 
       <main className="mx-auto max-w-7xl px-6 py-24">
-        {/* Hero / Title */}
-        <section className="text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+        {/* Hero */}
+        <section className="mx-auto max-w-3xl text-center">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">
             OmmSulaim Academy
+          </p>
+
+          <h1 className="mt-4 text-4xl font-bold tracking-tight md:text-5xl">
+            Qur’an &amp; Arabic Learning
           </h1>
-          <p className="mt-6 text-lg text-gray-600">
-            Structured Qur’an learning and educational programs designed to support
-            students of all ages in reading, understanding, and memorization.
+
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Structured Qur’an and Arabic learning designed to support students
+            at different stages of their learning journey.
           </p>
         </section>
 
-        {/* Programs Overview */}
-        <section className="mt-24 max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">Our Programs</h2>
-          <div className="mt-8 grid md:grid-cols-3 gap-8 text-left">
-            {/* Program 1 */}
-            <div className="p-6 border rounded-lg hover:shadow-lg transition">
-              <h3 className="text-xl font-medium mb-2">Qur’an Reading</h3>
-              <p className="text-gray-600">
-                Learn to read the Qur’an fluently with proper Tajweed and pronunciation.
+        {/* Programs */}
+        <section className="mx-auto mt-24 max-w-5xl">
+          <div className="text-center">
+            <h2 className="text-3xl font-semibold">Our Programs</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+              Choose the learning path that matches your current goals.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-8 md:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 p-6 transition hover:border-amber-300 hover:shadow-lg">
+              <h3 className="text-xl font-medium">Qur’an Reading</h3>
+              <p className="mt-3 leading-7 text-gray-600">
+                Learn to read the Qur’an fluently with proper pronunciation and
+                Tajweed foundations.
               </p>
               <Link
-                href="https://forms.gle/Tzvw6uvPqZfYab7e7"
+                href={enrolUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block text-blue-600 font-medium"
+                className="mt-5 inline-block font-medium text-sky-700 hover:text-amber-700"
               >
-                Enrol Now
+                Enrol Now →
               </Link>
             </div>
 
-            {/* Program 2 */}
-            <div className="p-6 border rounded-lg hover:shadow-lg transition">
-              <h3 className="text-xl font-medium mb-2">Tarteel & Tajweed</h3>
-              <p className="text-gray-600">
-                Enhance your recitation skills with correct rhythm, and Tajweed rules.
+            <div className="rounded-2xl border border-slate-200 p-6 transition hover:border-amber-300 hover:shadow-lg">
+              <h3 className="text-xl font-medium">Tarteel &amp; Tajweed</h3>
+              <p className="mt-3 leading-7 text-gray-600">
+                Develop more confident recitation through correct rhythm,
+                pronunciation, and Tajweed rules.
               </p>
               <Link
-                href="https://forms.gle/Tzvw6uvPqZfYab7e7"
+                href={enrolUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-block text-blue-600 font-medium"
+                className="mt-5 inline-block font-medium text-sky-700 hover:text-amber-700"
               >
-                Enrol Now
+                Enrol Now →
               </Link>
             </div>
 
-            {/* Program 3 */}
-            <div className="p-6 border rounded-lg hover:shadow-lg transition">
-              <h3 className="text-xl font-medium mb-2">Memorization (Hifz)</h3>
-              <p className="text-gray-600">
-                Structured support for memorizing the Qur’an efficiently and confidently.
+            <div className="rounded-2xl border border-amber-300 bg-amber-50 p-6 transition hover:shadow-lg">
+              <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
+                Coaching
               </p>
+
+              <h3 className="mt-2 text-xl font-medium">Hifz Coaching</h3>
+
+              <p className="mt-3 leading-7 text-gray-600">
+                Build a consistent memorization and revision routine through
+                focused coaching, guidance, and accountability.
+              </p>
+
               <Link
-                href="https://forms.gle/Tzvw6uvPqZfYab7e7"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block text-blue-600 font-medium"
+                href="/academy/hifz-coaching"
+                className="mt-5 inline-block font-medium text-sky-700 hover:text-amber-700"
               >
-                Enrol Now
+                Explore Hifz Coaching →
               </Link>
             </div>
           </div>
         </section>
 
         {/* How Learning Works */}
-        <section className="mt-24 max-w-4xl mx-auto text-center">
+        <section className="mx-auto mt-24 max-w-4xl text-center">
           <h2 className="text-3xl font-semibold">How Learning Works</h2>
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
-            <div className="p-4 border rounded-lg hover:shadow-lg transition">
-              <h3 className="font-medium">Step 1: Assessment</h3>
-              <p className="text-gray-600 mt-2">
-                Students are assessed to determine their current reading and memorization level.
+
+          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+            Learning is structured around the student’s goals, current level,
+            and ability to maintain a consistent routine.
+          </p>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            <div className="rounded-lg border p-6 transition hover:shadow-lg">
+              <h3 className="font-medium">01: Understand Your Goals</h3>
+              <p className="mt-2 text-gray-600">
+                We identify what the student wants to learn and the kind of
+                support they need.
               </p>
             </div>
-            <div className="p-4 border rounded-lg hover:shadow-lg transition">
-              <h3 className="font-medium">Step 2: Structured Learning</h3>
-              <p className="text-gray-600 mt-2">
-                Customized lesson plans are provided to build skills gradually and effectively.
+
+            <div className="rounded-lg border p-6 transition hover:shadow-lg">
+              <h3 className="font-medium">02: Structured Learning</h3>
+              <p className="mt-2 text-gray-600">
+                Lessons and coaching are organized into manageable steps that
+                support steady progress.
               </p>
             </div>
-            <div className="p-4 border rounded-lg hover:shadow-lg transition">
-              <h3 className="font-medium">Step 3: Progress Tracking</h3>
-              <p className="text-gray-600 mt-2">
-                Students receive regular feedback and guidance to stay on track and succeed.
+
+            <div className="rounded-lg border p-6 transition hover:shadow-lg">
+              <h3 className="font-medium">03: Ongoing Guidance</h3>
+              <p className="mt-2 text-gray-600">
+                Students receive guidance and feedback to help them stay
+                consistent and continue developing.
               </p>
             </div>
           </div>
         </section>
 
+        {/* Planner */}
+        <section className="mx-auto mt-24 max-w-4xl rounded-3xl border border-amber-200 bg-amber-50 px-6 py-12 text-center md:px-12">
+          <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
+            Free Hifz Resource
+          </p>
+
+          <h2 className="mt-3 text-3xl font-semibold">
+            Plan Your Qur’an Memorization
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl leading-8 text-gray-700">
+            Use the free Hifz Planner to organize new memorization and revision
+            and build a more consistent routine.
+          </p>
+
+          <Link
+            href="/academy/quran-memorization?entry=academy"
+            className="mt-7 inline-block rounded-lg bg-sky-700 px-6 py-3 text-sm font-medium text-white transition hover:bg-sky-800"
+          >
+            Open the Free Hifz Planner
+          </Link>
+        </section>
+
         {/* CTA */}
         <section className="mt-24 text-center">
-          <h2 className="text-3xl font-semibold">Ready to start your learning journey?</h2>
-          <div className="mt-6 flex justify-center gap-4">
+          <h2 className="text-3xl font-semibold">
+            Ready to begin your learning journey?
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+            Explore the programs above or get in touch if you need help
+            deciding where to begin.
+          </p>
+
+          <div className="mt-6 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
-              href="https://forms.gle/Tzvw6uvPqZfYab7e7"
+              href={enrolUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-lg bg-black px-6 py-3 text-white text-sm font-medium"
+              className="rounded-lg bg-black px-6 py-3 text-sm font-medium text-white"
             >
               Enrol Now
             </Link>
+
             <Link
               href="/contact"
               className="rounded-lg border border-gray-300 px-6 py-3 text-sm font-medium"
             >
               Contact Us
-            </Link>
-          </div>
-        </section>
-
-        {/* Additional CTA */}
-        <section className="mt-24 text-center">
-          <h2 className="text-3xl font-semibold">Open Qur’an Memorization Planner</h2>
-          <div className="mt-6 flex justify-center gap-4">
-            <Link
-              href="/academy/quran-memorization?entry=academy"
-              className="inline-flex items-center rounded-lg bg-black px-5 py-3 text-sm font-medium text-white hover:bg-gray-900"
-            >
-              Open Qur’an Memorization Planner
             </Link>
           </div>
         </section>
