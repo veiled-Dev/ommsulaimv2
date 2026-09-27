@@ -483,7 +483,7 @@ export default function AdminDashboard({ initialPosts, initialProducts }: Props)
               className="w-full rounded-lg border border-slate-300 px-3 py-2"
             />
             <input
-              required
+              required={productForm.access === "paid"}
               value={productForm.price}
               onChange={(e) => setProductForm((prev) => ({ ...prev, price: e.target.value }))}
               placeholder="Price e.g ₦5,000 (not needed for free resources)"
