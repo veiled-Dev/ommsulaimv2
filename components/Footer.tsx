@@ -8,7 +8,7 @@ export default function Footer() {
         <div>
           <h3 className="font-bold text-lg mb-4">OmmSulaim</h3>
           <p className="text-gray-600">
-            We provide digital learning, website design, and e-commerce solutions to empower learners and businesses.
+            Practical education, digital resources, and website solutions for learning and growing online.
           </p>
         </div>
 
@@ -27,9 +27,9 @@ export default function Footer() {
         <div>
           <h3 className="font-bold text-lg mb-4">Shop</h3>
           <ul className="space-y-2">
-            <li><Link href="/coming-soon" className="transition-colors hover:text-sky-700">Digital Products</Link></li>
-            <li><Link href="/coming-soon" className="transition-colors hover:text-sky-700">Clothing</Link></li>
-            <li><Link href="/coming-soon" className="transition-colors hover:text-sky-700">Accessories</Link></li>
+            <li><Link href="/shop" className="transition-colors hover:text-sky-700">All Resources</Link></li>
+            <li><Link href="/shop/digital-products" className="transition-colors hover:text-sky-700">Digital Products</Link></li>
+            <li><Link href="/academy/quran-memorization" className="transition-colors hover:text-sky-700">Free Hifz Planner</Link></li>
           </ul>
         </div>
 
