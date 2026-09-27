@@ -6,123 +6,265 @@ export default function HomePage() {
     <>
       <Navbar />
 
-      <main className="mx-auto max-w-7xl px-6 py-24">
+      <main className="mx-auto max-w-7xl px-6">
         {/* Hero */}
-        <section className="text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-            Digital Solutions for Learning, Growth, and Online Presence
-          </h1>
-          <p className="mt-6 text-lg text-gray-600">
-            OmmSulaim Digital Services Ltd is a digital solutions company focused on building structured learning systems, developing educational resources, and providing practical web solutions.
+        <section className="mx-auto max-w-4xl py-24 text-center md:py-32">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-amber-600">
+            OmmSulaim Digital Services Ltd
           </p>
-          <div className="mt-10 flex justify-center gap-4">
+
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900 md:text-6xl">
+            Learning, Digital Resources &amp; Online Solutions
+          </h1>
+
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+            OmmSulaim brings together Qur’an and Arabic education, practical
+            digital learning resources, and web solutions for educators,
+            families, and small organizations.
+          </p>
+
+          <div className="mt-10 flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/academy"
-              className="rounded-lg bg-sky-700 px-6 py-3 text-white text-sm font-medium shadow-sm transition hover:bg-sky-800"
+              className="rounded-lg bg-sky-700 px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-sky-800"
             >
               Explore the Academy
             </Link>
+
             <Link
-              href="/services"
+              href="/academy/quran-memorization?entry=academy"
               className="rounded-lg border border-amber-400 bg-white px-6 py-3 text-sm font-medium text-slate-900 transition hover:bg-amber-50"
             >
-              Our Services
+              Try the Free Hifz Planner
             </Link>
           </div>
         </section>
 
-        {/* About Snippet */}
-        <section className="mt-24 max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">About OmmSulaim</h2>
-          <p className="mt-4 text-gray-600">
-            OmmSulaim Digital Services Ltd is a registered digital services company with a focus on education technology, digital learning, and practical web solutions.
-          </p>
-          <p className="mt-4 text-gray-600">
-            The company develops structured systems, resources, and platforms designed to support effective learning and a functional online presence.
-          </p>
-          <p className="mt-4 text-gray-600">
-            We focus on creating simple, structured, and accessible digital systems that solve real learning and operational needs.
-          </p>
-          <Link
-            href="/about"
-            className="mt-4 inline-block font-medium text-sky-700 hover:text-amber-700"
-          >
-            Learn More
-          </Link>
-        </section>
+        {/* Three Pathways */}
+        <section className="py-16">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-wider text-amber-600">
+              Explore OmmSulaim
+            </p>
 
-        {/* Focus Areas */}
-        <section className="mt-24 max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">Our Focus Areas</h2>
-          <ul className="mt-6 space-y-2 text-gray-700">
-            <li>Education Technology (EdTech)</li>
-            <li>Digital Learning Systems</li>
-            <li>Web &amp; Online Solutions</li>
-          </ul>
-        </section>
+            <h2 className="mt-2 text-3xl font-semibold text-slate-900 md:text-4xl">
+              What can we help you with?
+            </h2>
+          </div>
 
-        {/* Services Preview */}
-        <section className="mt-24 max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">What We Offer</h2>
-          <div className="mt-8 grid md:grid-cols-3 gap-8">
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             <Link
               href="/academy"
-              className="rounded-lg border border-slate-200 bg-white p-6 transition hover:border-amber-300 hover:shadow-md"
+              className="group rounded-2xl border border-slate-200 bg-white p-8 transition hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg"
             >
-              <h3 className="text-xl font-medium mb-2">Education Platforms</h3>
-              <p className="text-gray-600">
-                Development and delivery of structured learning programs through dedicated platforms such as OmmSulaim Academy.
+              <p className="text-sm font-semibold text-amber-600">
+                Qur’an &amp; Arabic
               </p>
+
+              <h3 className="mt-3 text-xl font-semibold text-slate-900">
+                OmmSulaim Academy
+              </h3>
+
+              <p className="mt-3 leading-7 text-slate-600">
+                Structured learning support for Qur’an reading, Hifz, Tajweed,
+                and Arabic.
+              </p>
+
+              <span className="mt-6 inline-block text-sm font-semibold text-sky-700 group-hover:text-amber-700">
+                Explore the Academy →
+              </span>
             </Link>
+
             <Link
-              href="/coming-soon"
-              className="rounded-lg border border-slate-200 bg-white p-6 transition hover:border-amber-300 hover:shadow-md"
+              href="/academy/quran-memorization?entry=academy"
+              className="group rounded-2xl border border-slate-200 bg-white p-8 transition hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg"
             >
-              <h3 className="text-xl font-medium mb-2">Digital Learning Resources</h3>
-              <p className="text-gray-600">
-                Creation of digital products and materials designed to support structured education, independent study, and consistent learning.
+              <p className="text-sm font-semibold text-amber-600">
+                Free Resource
               </p>
+
+              <h3 className="mt-3 text-xl font-semibold text-slate-900">
+                Hifz Memorization Planner
+              </h3>
+
+              <p className="mt-3 leading-7 text-slate-600">
+                Organize new memorization and revision with a practical weekly
+                Qur’an memorization plan.
+              </p>
+
+              <span className="mt-6 inline-block text-sm font-semibold text-sky-700 group-hover:text-amber-700">
+                Try the Planner →
+              </span>
             </Link>
+
             <Link
               href="/services"
-              className="rounded-lg border border-slate-200 bg-white p-6 transition hover:border-amber-300 hover:shadow-md"
+              className="group rounded-2xl border border-slate-200 bg-white p-8 transition hover:-translate-y-1 hover:border-amber-300 hover:shadow-lg"
             >
-              <h3 className="text-xl font-medium mb-2">Web &amp; Digital Solutions</h3>
-              <p className="text-gray-600">
-                Website development, setup, and consultancy services to help individuals and small organizations establish and manage their online presence.
+              <p className="text-sm font-semibold text-amber-600">
+                Web &amp; Digital
               </p>
+
+              <h3 className="mt-3 text-xl font-semibold text-slate-900">
+                Web &amp; Digital Services
+              </h3>
+
+              <p className="mt-3 leading-7 text-slate-600">
+                Websites and practical digital solutions for educators, small
+                businesses, and organizations.
+              </p>
+
+              <span className="mt-6 inline-block text-sm font-semibold text-sky-700 group-hover:text-amber-700">
+                View Services →
+              </span>
             </Link>
           </div>
         </section>
 
-        {/* Featured Shop Section */}
-        <section className="mt-24 max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">Shop</h2>
-          <p className="mt-4 text-gray-600">
-            Access digital resources and tools developed to support learning, organization, and personal growth.
-          </p>
-          <Link
-            href="/coming-soon"
-            className="mt-6 inline-block rounded-lg bg-sky-700 px-6 py-3 text-sm font-medium text-white transition hover:bg-sky-800"
-          >
-            Go to Shop
-          </Link>
+        {/* About */}
+        <section className="py-20">
+          <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2 md:items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wider text-amber-600">
+                About OmmSulaim
+              </p>
+
+              <h2 className="mt-2 text-3xl font-semibold text-slate-900 md:text-4xl">
+                Practical solutions for learning and the digital world
+              </h2>
+            </div>
+
+            <div>
+              <p className="leading-8 text-slate-600">
+                OmmSulaim combines education and digital solutions to make
+                learning more structured, accessible, and practical.
+              </p>
+
+              <p className="mt-4 leading-8 text-slate-600">
+                From Qur’an and Arabic learning through OmmSulaim Academy to
+                digital resources and web solutions, the goal is simple:
+                create useful things that solve real problems.
+              </p>
+
+              <Link
+                href="/about"
+                className="mt-6 inline-block font-semibold text-sky-700 hover:text-amber-700"
+              >
+                Learn more about OmmSulaim →
+              </Link>
+            </div>
+          </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="mt-24 rounded-lg border border-slate-200 bg-white py-16 text-center">
-          <h2 className="text-3xl font-semibold">OmmSulaim Academy</h2>
-          <p className="mt-4 text-gray-600">
-            Our dedicated learning platform for Qur&#39;an and Arabic education.
-          </p>
-          <div className="mt-6 flex justify-center">
+        {/* Free Hifz Planner */}
+        <section className="py-16">
+          <div className="overflow-hidden rounded-3xl border border-amber-200 bg-amber-50 px-6 py-12 text-center md:px-12 md:py-16">
+            <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">
+              Free Tool
+            </p>
+
+            <h2 className="mt-3 text-3xl font-semibold text-slate-900 md:text-4xl">
+              Plan Your Hifz Journey
+            </h2>
+
+            <p className="mx-auto mt-4 max-w-2xl leading-8 text-slate-700">
+              A simple Qur’an memorization planner to help you organize new
+              memorization, recent revision, and older revision while building
+              a consistent routine.
+            </p>
+
+            <Link
+              href="/academy/quran-memorization?entry=academy"
+              className="mt-8 inline-block rounded-lg bg-sky-700 px-7 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-sky-800"
+            >
+              Try the Free Hifz Planner
+            </Link>
+
+            <p className="mt-5 text-sm text-slate-600">
+              Looking for more structure and guidance with your Hifz?
+            </p>
+
             <Link
               href="/academy"
-              className="rounded-lg bg-sky-700 px-6 py-3 text-sm font-medium text-white transition hover:bg-sky-800"
+              className="mt-2 inline-block text-sm font-semibold text-slate-900 underline decoration-amber-500 underline-offset-4 hover:text-amber-700"
+            >
+              Explore Hifz learning with OmmSulaim Academy →
+            </Link>
+          </div>
+        </section>
+
+        {/* Academy */}
+        <section className="py-20">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-semibold uppercase tracking-wider text-amber-600">
+              OmmSulaim Academy
+            </p>
+
+            <h2 className="mt-2 text-3xl font-semibold text-slate-900 md:text-4xl">
+              Learn with structure and purpose
+            </h2>
+
+            <p className="mt-5 leading-8 text-slate-600">
+              Explore Qur’an, Hifz, Tajweed, and Arabic learning support
+              designed for students at different stages of their learning
+              journey.
+            </p>
+
+            <Link
+              href="/academy"
+              className="mt-8 inline-block rounded-lg bg-sky-700 px-7 py-3 text-sm font-medium text-white transition hover:bg-sky-800"
             >
               Explore the Academy
             </Link>
           </div>
+        </section>
+
+        {/* Blog */}
+        <section className="py-16">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-wider text-amber-600">
+                From the Blog
+              </p>
+
+              <h2 className="mt-2 text-3xl font-semibold text-slate-900">
+                Practical ideas for learning and teaching
+              </h2>
+
+              <p className="mt-3 max-w-2xl text-slate-600">
+                Helpful articles, ideas, and resources for learners, parents,
+                teachers, and people building better online learning
+                experiences.
+              </p>
+            </div>
+
+            <Link
+              href="/blog"
+              className="font-semibold text-sky-700 hover:text-amber-700"
+            >
+              Visit the Blog →
+            </Link>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="mb-20 rounded-3xl bg-slate-900 px-6 py-14 text-center text-white md:px-12">
+          <h2 className="text-3xl font-semibold md:text-4xl">
+            Have a learning or digital project in mind?
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-2xl leading-8 text-slate-300">
+            Whether you are looking for learning support, a useful digital
+            resource, or help building your online presence, let’s explore
+            what you need.
+          </p>
+
+          <Link
+            href="/contact"
+            className="mt-8 inline-block rounded-lg bg-amber-400 px-7 py-3 text-sm font-semibold text-slate-900 transition hover:bg-amber-300"
+          >
+            Get in Touch
+          </Link>
         </section>
       </main>
     </>
