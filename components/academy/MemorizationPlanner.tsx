@@ -48,36 +48,15 @@ export default function MemorizationPlanner() {
       };
 
       setState({
-        totalPages: Math.max(
-          1,
-          toNumber(parsed.totalPages, DEFAULT_STATE.totalPages)
-        ),
-        startingPage: Math.max(
-          1,
-          toNumber(parsed.startingPage, DEFAULT_STATE.startingPage)
-        ),
-        oldMemorizedPages: Math.max(
-          0,
-          toNumber(
-            parsed.oldMemorizedPages,
-            DEFAULT_STATE.oldMemorizedPages
-          )
-        ),
-        pagesPerDayNew: Math.max(
-          1,
-          toNumber(parsed.pagesPerDayNew, DEFAULT_STATE.pagesPerDayNew)
-        ),
+        totalPages: Math.max(1, toNumber(parsed.totalPages, DEFAULT_STATE.totalPages)),
+        startingPage: Math.max(1, toNumber(parsed.startingPage, DEFAULT_STATE.startingPage)),
+        oldMemorizedPages: Math.max(0, toNumber(parsed.oldMemorizedPages, DEFAULT_STATE.oldMemorizedPages)),
+        pagesPerDayNew: Math.max(1, toNumber(parsed.pagesPerDayNew, DEFAULT_STATE.pagesPerDayNew)),
         olderRevisionPagesPerDay: Math.max(
           1,
-          toNumber(
-            parsed.olderRevisionPagesPerDay,
-            DEFAULT_STATE.olderRevisionPagesPerDay
-          )
+          toNumber(parsed.olderRevisionPagesPerDay, DEFAULT_STATE.olderRevisionPagesPerDay)
         ),
-        weeks: Math.max(
-          1,
-          Math.min(52, toNumber(parsed.weeks, DEFAULT_STATE.weeks))
-        ),
+        weeks: Math.max(1, Math.min(52, toNumber(parsed.weeks, DEFAULT_STATE.weeks))),
         completed: parsed.completed ?? {},
       });
 
@@ -122,22 +101,13 @@ export default function MemorizationPlanner() {
   );
 
   const weeklyNew = state.pagesPerDayNew * 7;
-  const remaining = Math.max(
-    0,
-    state.totalPages - state.startingPage + 1
-  );
-  const estWeeks =
-    weeklyNew > 0 ? Math.ceil(remaining / weeklyNew) : 0;
+  const remaining = Math.max(0, state.totalPages - state.startingPage + 1);
+  const estWeeks = weeklyNew > 0 ? Math.ceil(remaining / weeklyNew) : 0;
 
-  const totalDays = schedule.reduce(
-    (acc, w) => acc + w.days.length,
-    0
-  );
+  const totalDays = schedule.reduce((acc, w) => acc + w.days.length, 0);
   const doneDays = Object.values(state.completed).filter(Boolean).length;
   const progressPct =
-    totalDays === 0
-      ? 0
-      : Math.min(100, Math.round((doneDays / totalDays) * 100));
+    totalDays === 0 ? 0 : Math.min(100, Math.round((doneDays / totalDays) * 100));
 
   const orderedDayKeys = useMemo(() => {
     const keys: string[] = [];
@@ -160,11 +130,7 @@ export default function MemorizationPlanner() {
 
       if (safeValue === prev[key]) return prev;
 
-      return {
-        ...prev,
-        [key]: safeValue,
-        completed: {},
-      };
+      return { ...prev, [key]: safeValue, completed: {} };
     });
   };
 
@@ -176,11 +142,7 @@ export default function MemorizationPlanner() {
 
       if (safeValue === prev.oldMemorizedPages) return prev;
 
-      return {
-        ...prev,
-        oldMemorizedPages: safeValue,
-        completed: {},
-      };
+      return { ...prev, oldMemorizedPages: safeValue, completed: {} };
     });
   };
 
@@ -235,111 +197,100 @@ export default function MemorizationPlanner() {
           </div>
         </div>
 
-        <div className="grid gap-4 p-5 md:grid-cols-2 md:p-6">
-          <label className="text-sm">
-            <span className="mb-1.5 block font-medium">Total Qur’an pages</span>
+        <div className="grid gap-5 p-5 md:grid-cols-2 md:p-6">
+          <label className="block text-sm">
+            <span className="mb-2 block text-base font-semibold">Total Qur’an pages</span>
             <input
               type="number"
               min={1}
               value={state.totalPages}
-              onChange={(e) =>
-                setNumeric("totalPages", Number(e.target.value))
-              }
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              onChange={(e) => setNumeric("totalPages", Number(e.target.value))}
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
+            <span className="mt-2 block text-sm leading-5 text-slate-500 dark:text-slate-400">
               A standard Madinah Mushaf is often planned as 604 pages. Change this if your Mushaf differs.
             </span>
           </label>
 
-          <label className="text-sm">
-            <span className="mb-1.5 block font-medium">Starting page for new Hifz</span>
+          <label className="block text-sm">
+            <span className="mb-2 block text-base font-semibold">Starting page for new Hifz</span>
             <input
               type="number"
               min={1}
               max={state.totalPages + 1}
               value={state.startingPage}
-              onChange={(e) =>
-                setNumeric("startingPage", Number(e.target.value))
-              }
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              onChange={(e) => setNumeric("startingPage", Number(e.target.value))}
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
+            <span className="mt-2 block text-sm leading-5 text-slate-500 dark:text-slate-400">
               Enter the page where you will begin your next new memorization.
             </span>
           </label>
 
-          <label className="text-sm">
-            <span className="mb-1.5 block font-medium">Pages already memorized</span>
+          <label className="block text-sm">
+            <span className="mb-2 block text-base font-semibold">Pages already memorized</span>
             <input
               type="number"
               min={0}
               max={state.totalPages}
               value={state.oldMemorizedPages}
-              onChange={(e) =>
-                setOldMemorizedPages(Number(e.target.value))
-              }
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              onChange={(e) => setOldMemorizedPages(Number(e.target.value))}
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
+            <span className="mt-2 block text-sm leading-5 text-slate-500 dark:text-slate-400">
               These pages form the starting pool for established revision. If your memorization is sequential, this will usually be the pages before your starting page.
             </span>
           </label>
 
-          <label className="text-sm">
-            <span className="mb-1.5 block font-medium">New pages per day</span>
+          <label className="block text-sm">
+            <span className="mb-2 block text-base font-semibold">New pages per day</span>
             <input
               type="number"
               min={1}
               value={state.pagesPerDayNew}
-              onChange={(e) =>
-                setNumeric("pagesPerDayNew", Number(e.target.value))
-              }
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              onChange={(e) => setNumeric("pagesPerDayNew", Number(e.target.value))}
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
+            <span className="mt-2 block text-sm leading-5 text-slate-500 dark:text-slate-400">
               Your recent revision load is calculated from this new-memorization pace.
             </span>
           </label>
 
-          <label className="text-sm">
-            <span className="mb-1.5 block font-medium">Older revision pages per day</span>
+          <label className="block text-sm">
+            <span className="mb-2 block text-base font-semibold">Older revision pages per day</span>
             <input
               type="number"
               min={1}
               max={200}
               value={state.olderRevisionPagesPerDay}
               onChange={(e) =>
-                setNumeric(
-                  "olderRevisionPagesPerDay",
-                  Number(e.target.value)
-                )
+                setNumeric("olderRevisionPagesPerDay", Number(e.target.value))
               }
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
             />
-            <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
+            <span className="mt-2 block text-sm leading-5 text-slate-500 dark:text-slate-400">
               Choose a manageable amount for established memorization. The planner estimates the rotation from this number.
             </span>
           </label>
 
-          <label className="text-sm">
-            <span className="mb-1.5 block font-medium">Weeks to generate</span>
+          <label className="block text-sm">
+            <span className="mb-2 block text-base font-semibold">Weeks to generate</span>
             <input
               type="number"
               min={1}
               max={52}
               value={state.weeks}
               onChange={(e) => setNumeric("weeks", Number(e.target.value))}
-              className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 outline-none focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-300 dark:focus:ring-slate-700"
+              className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base font-medium text-slate-900 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-slate-700 dark:focus:ring-slate-700"
             />
-            <span className="mt-1 block text-xs text-slate-500 dark:text-slate-400">
+            <span className="mt-2 block text-sm leading-5 text-slate-500 dark:text-slate-400">
               Generate up to 52 weeks at a time.
             </span>
           </label>
 
-          <div className="rounded-xl bg-slate-50 p-4 text-sm dark:bg-slate-800/80 md:col-span-2">
-            <p className="font-semibold">Your plan at a glance</p>
-            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+          <div className="rounded-2xl bg-slate-50 p-5 text-base dark:bg-slate-800/80 md:col-span-2">
+            <p className="font-bold">Your plan at a glance</p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
               <p>
                 New memorization: <strong>{weeklyNew} pages/week</strong>
               </p>
@@ -355,37 +306,29 @@ export default function MemorizationPlanner() {
             </div>
           </div>
 
-          <div className="rounded-xl border border-slate-200 p-4 text-sm dark:border-slate-700 md:col-span-2">
-            <p className="font-semibold">How the revision logic works</p>
-            <ul className="mt-2 list-disc space-y-1 pl-5 text-slate-600 dark:text-slate-300">
-              <li>
-                New memorization moves forward page by page from your chosen starting point.
-              </li>
-              <li>
-                Recent revision focuses on the pages you have memorized most recently and rotates them frequently while they are still fresh.
-              </li>
-              <li>
-                Older revision maintains established memorization in manageable portions. As newer pages move out of the recent pool, they join this maintenance pool automatically.
-              </li>
-              <li>
-                The revision settings are a planning guide, not a fixed Hifz methodology. Adjust the load to what the student can maintain consistently.
-              </li>
+          <div className="rounded-2xl border border-slate-200 p-5 text-base dark:border-slate-700 md:col-span-2">
+            <p className="font-bold">How the revision logic works</p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 leading-6 text-slate-600 dark:text-slate-300">
+              <li>New memorization moves forward page by page from your chosen starting point.</li>
+              <li>Recent revision focuses on the pages you have memorized most recently and rotates them frequently while they are still fresh.</li>
+              <li>Older revision maintains established memorization in manageable portions. As newer pages move out of the recent pool, they join this maintenance pool automatically.</li>
+              <li>The revision settings are a planning guide, not a fixed Hifz methodology. Adjust the load to what the student can maintain consistently.</li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-slate-200 px-5 py-4 dark:border-slate-700">
-          <div className="flex items-center justify-between gap-4 text-sm">
+        <div className="border-t border-slate-200 px-5 py-5 dark:border-slate-700">
+          <div className="flex items-center justify-between gap-4 text-base">
             <div>
-              <span className="font-semibold">Progress</span>
-              <span className="ml-2 text-slate-500 dark:text-slate-400">
+              <span className="font-bold">Progress</span>
+              <span className="ml-2 text-slate-600 dark:text-slate-300">
                 {doneDays} of {totalDays} days completed
               </span>
             </div>
-            <span className="font-semibold">{progressPct}%</span>
+            <span className="font-bold">{progressPct}%</span>
           </div>
           <div
-            className="mt-3 h-2.5 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
+            className="mt-3 h-3 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-700"
             aria-label={`Hifz planner progress: ${progressPct}%`}
           >
             <div
@@ -393,10 +336,8 @@ export default function MemorizationPlanner() {
               style={{ width: `${progressPct}%` }}
             />
           </div>
-          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-            {hydrated
-              ? "Saved automatically on this device."
-              : "Loading your saved plan..."}
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            {hydrated ? "Saved automatically on this device." : "Loading your saved plan..."}
           </p>
         </div>
       </div>
@@ -405,20 +346,20 @@ export default function MemorizationPlanner() {
         <button
           type="button"
           onClick={clearChecks}
-          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-slate-800"
+          className="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-slate-800"
         >
           Clear Completed Checks
         </button>
         <button
           type="button"
           onClick={resetAll}
-          className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:opacity-90 dark:bg-white dark:text-black"
+          className="rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white hover:opacity-90 dark:bg-white dark:text-black"
         >
           Reset Planner
         </button>
         <a
           href="mailto:support@ommsulaim.com?subject=Qur%E2%80%99an%20Planner%20Feedback"
-          className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-slate-800"
+          className="rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold hover:bg-slate-50 dark:border-slate-600 dark:hover:bg-slate-800"
         >
           Send Feedback
         </a>
@@ -430,21 +371,27 @@ export default function MemorizationPlanner() {
             key={week.week}
             className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900"
           >
-            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-700 dark:bg-slate-800">
-              <h3 className="font-semibold">Week {week.week}</h3>
-              <span className="text-xs text-slate-500 dark:text-slate-400">
-                7-day plan
-              </span>
+            <div className="flex items-center justify-between border-b border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-700 dark:bg-slate-800">
+              <h3 className="text-lg font-bold">Week {week.week}</h3>
+              <span className="text-sm font-medium text-slate-600 dark:text-slate-300">7-day plan</span>
             </div>
+
             <div className="overflow-x-auto">
-              <table className="min-w-[760px] w-full text-sm">
-                <thead className="bg-white dark:bg-slate-900">
-                  <tr className="border-b border-slate-200 text-slate-700 dark:border-slate-700 dark:text-slate-200">
-                    <th className="px-4 py-3 text-left font-semibold">Done</th>
-                    <th className="px-4 py-3 text-left font-semibold">Day</th>
-                    <th className="px-4 py-3 text-left font-semibold">New Memorization</th>
-                    <th className="px-4 py-3 text-left font-semibold">Recent Revision</th>
-                    <th className="px-4 py-3 text-left font-semibold">Older Revision</th>
+              <table className="min-w-[900px] w-full table-fixed text-base">
+                <colgroup>
+                  <col className="w-[9%]" />
+                  <col className="w-[11%]" />
+                  <col className="w-[26%]" />
+                  <col className="w-[27%]" />
+                  <col className="w-[27%]" />
+                </colgroup>
+                <thead className="bg-slate-100 dark:bg-slate-800">
+                  <tr className="border-b-2 border-slate-200 dark:border-slate-700">
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">Done</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">Day</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">New Memorization</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">Recent Revision</th>
+                    <th className="px-5 py-4 text-left text-sm font-bold uppercase tracking-wide">Older Revision</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -461,32 +408,34 @@ export default function MemorizationPlanner() {
                     return (
                       <tr
                         key={key}
-                        className={`border-b last:border-0 dark:border-slate-700 ${
+                        className={`border-b border-slate-200 last:border-0 dark:border-slate-700 ${
                           checked ? "bg-slate-50 dark:bg-slate-800/60" : ""
                         }`}
                       >
-                        <td className="px-4 py-3">
+                        <td className="px-5 py-5 align-top">
                           <input
                             type="checkbox"
                             checked={checked}
                             disabled={!checked && !canCheck}
-                            onChange={(e) =>
-                              toggleDone(key, e.target.checked)
-                            }
+                            onChange={(e) => toggleDone(key, e.target.checked)}
                             aria-label={`Mark Week ${week.week} ${d.dayLabel} complete`}
-                            className="h-4 w-4"
+                            className="h-5 w-5 rounded"
                           />
                         </td>
-                        <td className="px-4 py-3 font-medium">{d.dayLabel}</td>
-                        <td className="px-4 py-3">{d.newMemorization}</td>
-                        <td className="px-4 py-3">{d.newRevision}</td>
-                        <td className="px-4 py-3">{d.oldRevision}</td>
+                        <td className="px-5 py-5 align-top font-bold">{d.dayLabel}</td>
+                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-900 dark:text-slate-100">{d.newMemorization}</td>
+                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-900 dark:text-slate-100">{d.newRevision}</td>
+                        <td className="px-5 py-5 align-top font-medium leading-7 text-slate-900 dark:text-slate-100">{d.oldRevision}</td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
             </div>
+
+            <p className="border-t border-slate-200 bg-slate-50 px-5 py-3 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300">
+              On a smaller screen, swipe horizontally to see the full schedule.
+            </p>
           </div>
         ))}
       </div>
