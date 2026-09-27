@@ -3,11 +3,11 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="mt-24 border-t border-slate-200 bg-white">
-      <div className="max-w-7xl mx-auto grid gap-8 px-6 py-16 text-gray-700 md:grid-cols-4">
+      <div className="max-w-7xl mx-auto grid gap-8 px-6 py-16 text-slate-700 md:grid-cols-4">
         {/* About */}
         <div>
           <h3 className="font-bold text-lg mb-4">OmmSulaim</h3>
-          <p className="text-gray-600">
+          <p className="text-slate-600">
             Practical education, digital resources, and website solutions for learning and growing online.
           </p>
         </div>
@@ -41,8 +41,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mt-8 border-t border-slate-200 py-4 text-center text-sm text-gray-600">
-        © 2026 OmmSulaim Digital Services Ltd. All rights reserved.
+      <div className="mt-8 border-t border-slate-200 py-4 text-center text-sm text-slate-600">
+        © 2026 OmmSulaim Digital Service Ltd. All rights reserved.
       </div>
     </footer>
   );
