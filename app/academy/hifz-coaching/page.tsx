@@ -32,7 +32,7 @@ export default function HifzCoachingPage() {
             </Link>
 
             <Link
-              href="/academy/quran-memorization?entry=academy"
+              href="/academy/quran-memorization"
               className="rounded-lg border border-amber-400 bg-white px-7 py-3 text-sm font-medium text-slate-900 transition hover:bg-amber-50"
             >
               Try the Free Hifz Planner
@@ -201,7 +201,7 @@ export default function HifzCoachingPage() {
             </p>
 
             <Link
-              href="/academy/quran-memorization?entry=academy"
+              href="/academy/quran-memorization"
               className="mt-6 inline-block font-semibold text-sky-700 underline decoration-amber-500 underline-offset-4 hover:text-amber-700"
             >
               Open the Free Hifz Planner →
