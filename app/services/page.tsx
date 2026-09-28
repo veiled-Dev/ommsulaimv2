@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
@@ -38,6 +39,8 @@ const services = [
     link: "Discuss Your Needs",
   },
 ];
+
+export const metadata: Metadata = { title: "Digital Services", description: "Custom websites, e-learning solutions, digital resources, training, and technical support from OmmSulaim Digital Service Ltd." };
 
 export default function ServicesPage() {
   return (
