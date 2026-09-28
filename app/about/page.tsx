@@ -1,5 +1,8 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
+
+export const metadata: Metadata = { title: "About OmmSulaim", description: "Learn about OmmSulaim Digital Service Ltd and our work across education, digital learning, and practical technology services." };
 
 export default function AboutPage() {
   return (
