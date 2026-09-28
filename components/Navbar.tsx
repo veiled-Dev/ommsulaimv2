@@ -33,7 +33,7 @@ export default function Navbar() {
           <li><Link href="/shop" className="hover:text-sky-700 transition-colors duration-300">Shop</Link></li>
           <li><Link href="/academy" className="hover:text-sky-700 transition-colors duration-300">Academy</Link></li>
           <li><Link href="/blog" className="hover:text-sky-700 transition-colors duration-300">Blog</Link></li>
-          <li><Link href="/contact" className="hover:text-sky-700 transition-colors duration-300">Contact</Link></li>
+          <li><Link href="/contact" className="rounded-lg bg-sky-700 px-4 py-2 text-white shadow-sm transition hover:bg-sky-800">Contact</Link></li>
         </ul>
 
         {/* Mobile Hamburger */}
