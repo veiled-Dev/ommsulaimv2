@@ -31,7 +31,10 @@ export default function RootLayout({
             <GoogleAnalytics gaId={gaId} />
           </Suspense>
         )}
-        <div className="flex min-h-screen flex-col">\n          <main className="flex-1">{children}</main>\n          <Footer />\n        </div>\n      </body>
+        <div className="flex min-h-screen flex-col">
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </div>\n      </body>
     </html>
   );
 }
