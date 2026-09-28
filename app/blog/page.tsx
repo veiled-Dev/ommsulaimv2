@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -27,6 +28,8 @@ function readTime(html: string) {
   const words = html.replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
   return Math.max(1, Math.round(words / 200));
 }
+
+export const metadata: Metadata = { title: "OmmSulaim Journal", description: "Practical reads on learning, teaching, Muslim family life, digital work, and daily growth." };
 
 export default async function BlogPage({ searchParams }: PageProps) {
   const params = await searchParams;
@@ -73,7 +76,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
             OmmSulaim Journal
           </h1>
           <p className="mt-4 max-w-2xl text-slate-700">
-            Practical reads for Muslim family life, learning, and daily growth.
+            Practical reads on learning, teaching, Muslim family life, digital work, and daily growth.
           </p>
 
           <form action="/blog" method="get" className="mt-6 flex flex-col gap-3 sm:flex-row">
