@@ -36,8 +36,6 @@ export async function POST(req: Request) {
   const title = String(body.title ?? "").trim();
   const description = String(body.description ?? "").trim();
   const access = body.access === "free" ? "free" : "paid";
-  const access = body.access === "free" ? "free" : "paid";
-  const access = body.access === "free" ? "free" : "paid";
   const price = String(body.price ?? "").trim();
   const buyLink = String(body.buyLink ?? "").trim() || "/contact";
 
