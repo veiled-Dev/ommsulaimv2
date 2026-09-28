@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+
+export const metadata: Metadata = { title: "Contact OmmSulaim", description: "Contact OmmSulaim Digital Service Ltd about Academy learning, digital resources, websites, and other digital services." };
 
 export default function ContactPage() {
   return (
@@ -11,7 +14,7 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
             Contact Us
           </h1>
-          <p className="mt-6 text-lg text-gray-600">
+          <p className="mt-6 text-lg text-slate-600">
             We’re here to answer your questions and guide you. Reach out via WhatsApp, email, or the form below.
           </p>
         </section>
@@ -19,7 +22,7 @@ export default function ContactPage() {
         {/* Contact Information */}
         <section className="mt-24 max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-semibold">Get in Touch</h2>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-slate-600">
             WhatsApp: <a href="https://wa.me/2349160341006" className="font-medium text-sky-700">+2349160341006</a> <br />
             Email: <a href="mailto:support@ommsulaim.com" className="font-medium text-sky-700">support@ommsulaim.com</a>
           </p>
@@ -29,7 +32,7 @@ export default function ContactPage() {
         <section className="mt-16 max-w-3xl mx-auto">
           <form className="grid gap-6" action="/api/contact" method="post">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <label className="block text-sm font-medium text-slate-700">Name</label>
               <input
                 name="name"
                 type="text"
@@ -39,7 +42,7 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <label className="block text-sm font-medium text-slate-700">Email</label>
               <input
                 name="email"
                 type="email"
@@ -49,7 +52,7 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Subject</label>
+              <label className="block text-sm font-medium text-slate-700">Subject</label>
               <input
                 name="subject"
                 type="text"
@@ -59,7 +62,7 @@ export default function ContactPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Message</label>
+              <label className="block text-sm font-medium text-slate-700">Message</label>
               <textarea
                 name="message"
                 required
@@ -80,7 +83,7 @@ export default function ContactPage() {
         {/* CTA */}
         <section className="mt-24 text-center">
           <h2 className="text-3xl font-semibold">Prefer Instant Messaging?</h2>
-          <p className="mt-4 text-gray-600">
+          <p className="mt-4 text-slate-600">
             Message us on WhatsApp for quick responses.
           </p>
           <div className="mt-6">
