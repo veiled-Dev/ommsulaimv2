@@ -2,47 +2,49 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-slate-200 bg-white">
-      <div className="max-w-7xl mx-auto grid gap-8 px-6 py-16 text-slate-700 md:grid-cols-4">
-        {/* About */}
+    <footer className="mt-20 border-t border-slate-200 bg-slate-950 text-slate-300">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
         <div>
-          <h3 className="font-bold text-lg mb-4">OmmSulaim</h3>
-          <p className="text-slate-600">
+          <h2 className="text-lg font-bold text-white">OmmSulaim</h2>
+          <p className="mt-4 leading-7 text-slate-400">
             Practical education, digital resources, and website solutions for learning and growing online.
           </p>
         </div>
-
-        {/* Quick Links */}
         <div>
-          <h3 className="font-bold text-lg mb-4">Quick Links</h3>
-          <ul className="space-y-2">
-            <li><Link href="/" className="transition-colors hover:text-sky-700">Home</Link></li>
-            <li><Link href="/about" className="transition-colors hover:text-sky-700">About</Link></li>
-            <li><Link href="/services" className="transition-colors hover:text-sky-700">Services</Link></li>
-            <li><Link href="/contact" className="transition-colors hover:text-sky-700">Contact</Link></li>
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-300">Explore</h3>
+          <ul className="mt-4 space-y-3 text-sm">
+            <li><Link href="/about" className="hover:text-white">About</Link></li>
+            <li><Link href="/services" className="hover:text-white">Services</Link></li>
+            <li><Link href="/academy" className="hover:text-white">Academy</Link></li>
+            <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
           </ul>
         </div>
-
-        {/* Shop */}
         <div>
-          <h3 className="font-bold text-lg mb-4">Shop</h3>
-          <ul className="space-y-2">
-            <li><Link href="/shop" className="transition-colors hover:text-sky-700">All Resources</Link></li>
-            <li><Link href="/shop/digital-products" className="transition-colors hover:text-sky-700">Digital Products</Link></li>
-            <li><Link href="/academy/quran-memorization" className="transition-colors hover:text-sky-700">Free Hifz Planner</Link></li>
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-300">Resources</h3>
+          <ul className="mt-4 space-y-3 text-sm">
+            <li><Link href="/shop" className="hover:text-white">Digital Shop</Link></li>
+            <li><Link href="/shop/digital-products" className="hover:text-white">Digital Products</Link></li>
+            <li><Link href="/academy/quran-memorization" className="hover:text-white">Free Hifz Planner</Link></li>
           </ul>
         </div>
-
-        {/* Contact */}
         <div>
-          <h3 className="font-bold text-lg mb-4">Contact</h3>
-          <p>WhatsApp: <a href="https://wa.me/2349160341006" className="text-sky-700 hover:text-amber-700 hover:underline">+2349160341006</a></p>
-          <p>Email: <a href="mailto:support@ommsulaim.com" className="text-sky-700 hover:text-amber-700 hover:underline">support@ommsulaim.com</a></p>
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-amber-300">Get in touch</h3>
+          <div className="mt-4 space-y-3 text-sm">
+            <p><a href="https://wa.me/2349160341006" className="hover:text-white">WhatsApp: +234 916 034 1006</a></p>
+            <p><a href="mailto:support@ommsulaim.com" className="hover:text-white">support@ommsulaim.com</a></p>
+            <Link href="/contact" className="inline-flex font-semibold text-amber-300 hover:text-amber-200">Contact OmmSulaim →</Link>
+          </div>
         </div>
       </div>
-
-      <div className="mt-8 border-t border-slate-200 py-4 text-center text-sm text-slate-600">
-        © 2026 OmmSulaim Digital Service Ltd. All rights reserved.
+      <div className="border-t border-slate-800">
+        <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-5 text-center text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:text-left">
+          <p>© 2026 OmmSulaim Digital Service Ltd. All rights reserved.</p>
+          <p>
+            <Link href="/terms" className="hover:text-slate-300">Terms</Link>
+            <span className="mx-2">·</span>
+            <Link href="/privacy-policy" className="hover:text-slate-300">Privacy Policy</Link>
+          </p>
+        </div>
       </div>
     </footer>
   );
