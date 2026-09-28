@@ -21,9 +21,9 @@ export default function AboutPage() {
           </p>
         </section>
 
-        {/* Who We Are */}
+        {/* A little about what we do */}
         <section className="mt-24 max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">Who We Are</h2>
+          <h2 className="text-3xl font-semibold">A little about what we do</h2>
           <p className="mt-4 text-slate-600">
             OmmSulaim Digital Service Ltd is a Nigerian-registered company focused
             on education, digital learning, and practical technology services.  
