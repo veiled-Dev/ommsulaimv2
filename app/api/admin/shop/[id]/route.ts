@@ -1,12 +1,10 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { deleteShopProduct, updateShopProduct, type ShopCategory } from "@/lib/shop";
+import { deleteShopProduct, updateShopProduct, type ShopCategory, type ShopCurrency } from "@/lib/shop";
 import { isAdminAuthenticated } from "@/lib/admin-auth";
 
 export const runtime = "nodejs";
-
 type Params = { params: Promise<{ id: string }> };
-
 const validCategories: ShopCategory[] = ["digital-products"];
 
 async function ensureAdmin() {
@@ -20,13 +18,12 @@ function parseCategory(value: unknown): ShopCategory | undefined {
 }
 
 export async function PATCH(req: Request, { params }: Params) {
-  if (!(await ensureAdmin())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
+  if (!(await ensureAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const access = body.access === "free" ? "free" : body.access === "paid" ? "paid" : undefined;
+  const currency: ShopCurrency | undefined = body.currency === "USD" ? "USD" : body.currency === "NGN" ? "NGN" : undefined;
 
   const product = await updateShopProduct(id, {
     category: parseCategory(body.category),
@@ -34,27 +31,21 @@ export async function PATCH(req: Request, { params }: Params) {
     title: typeof body.title === "string" ? body.title : undefined,
     description: typeof body.description === "string" ? body.description : undefined,
     price: typeof body.price === "string" ? body.price : undefined,
+    currency,
     buyLink: typeof body.buyLink === "string" ? body.buyLink : undefined,
+    downloadLink: typeof body.downloadLink === "string" ? body.downloadLink : undefined,
   });
 
-  if (!product) {
-    return NextResponse.json({ error: "Product not found." }, { status: 404 });
-  }
+  if (!product) return NextResponse.json({ error: "Product not found." }, { status: 404 });
+  if (product.access === "paid" && (!product.price || !product.downloadLink)) return NextResponse.json({ error: "Paid products require a price and download link." }, { status: 400 });
 
   return NextResponse.json({ product });
 }
 
 export async function DELETE(_req: Request, { params }: Params) {
-  if (!(await ensureAdmin())) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
+  if (!(await ensureAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
   const ok = await deleteShopProduct(id);
-
-  if (!ok) {
-    return NextResponse.json({ error: "Product not found." }, { status: 404 });
-  }
-
+  if (!ok) return NextResponse.json({ error: "Product not found." }, { status: 404 });
   return NextResponse.json({ success: true });
 }
