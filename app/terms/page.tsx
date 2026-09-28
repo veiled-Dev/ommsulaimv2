@@ -31,7 +31,7 @@ export default function TermsPage() {
 
           <div>
             <h2 className="text-2xl font-semibold mb-2">Payments & Orders</h2>
-            <p>All transactions are final for digital products. For physical products, shipping and returns policies apply as described in the Shop section.</p>
+            <p>All transactions are final for digital products. For Digital products and services are subject to the specific purchase or service terms presented at the time of purchase.</p>
           </div>
 
           <div>
@@ -46,7 +46,7 @@ export default function TermsPage() {
 
           <div>
             <h2 className="text-2xl font-semibold mb-2">Contact</h2>
-            <p>For legal questions, contact us at <a href="mailto:info@ommsulaim.com" className="text-blue-600">info@ommsulaim.com</a>.</p>
+            <p>For legal questions, contact us at <a href="mailto:support@ommsulaim.com" className="text-blue-600">support@ommsulaim.com</a>.</p>
           </div>
         </section>
       </main>
