@@ -1,4 +1,6 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
 import Navbar from "@/components/Navbar";
 
 const audiences = [
@@ -53,6 +55,8 @@ const process = [
   ["03", "Build", "We develop the website and shape the experience across screen sizes."],
   ["04", "Review & Launch", "You review the finished site, we make agreed adjustments, and prepare it for launch."],
 ];
+
+export const metadata: Metadata = { title: "Website Design & Development", description: "Custom responsive websites for small businesses, personal brands, educators, and online academies." };
 
 export default function WebsiteDevelopmentPage() {
   return (
