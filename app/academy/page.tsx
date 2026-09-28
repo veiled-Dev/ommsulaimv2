@@ -1,7 +1,10 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Link from "next/link";
 
 const enrolUrl = "https://forms.gle/Tzvw6uvPqZfYab7e7";
+
+export const metadata: Metadata = { title: "Qur’an & Arabic Learning", description: "Explore OmmSulaim Academy programs for Qur’an reading, Tarteel and Tajweed, and structured Hifz coaching." };
 
 export default function AcademyPage() {
   return (
@@ -19,7 +22,7 @@ export default function AcademyPage() {
             Qur’an &amp; Arabic Learning
           </h1>
 
-          <p className="mt-6 text-lg leading-8 text-gray-600">
+          <p className="mt-6 text-lg leading-8 text-slate-600">
             Structured Qur’an and Arabic learning designed to support students
             at different stages of their learning journey.
           </p>
@@ -29,7 +32,7 @@ export default function AcademyPage() {
         <section className="mx-auto mt-24 max-w-5xl">
           <div className="text-center">
             <h2 className="text-3xl font-semibold">Our Programs</h2>
-            <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+            <p className="mx-auto mt-4 max-w-2xl text-slate-600">
               Choose the learning path that matches your current goals.
             </p>
           </div>
@@ -37,7 +40,7 @@ export default function AcademyPage() {
           <div className="mt-8 grid gap-8 md:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 p-6 transition hover:border-amber-300 hover:shadow-lg">
               <h3 className="text-xl font-medium">Qur’an Reading</h3>
-              <p className="mt-3 leading-7 text-gray-600">
+              <p className="mt-3 leading-7 text-slate-600">
                 Learn to read the Qur’an fluently with proper pronunciation and
                 Tajweed foundations.
               </p>
@@ -53,7 +56,7 @@ export default function AcademyPage() {
 
             <div className="rounded-2xl border border-slate-200 p-6 transition hover:border-amber-300 hover:shadow-lg">
               <h3 className="text-xl font-medium">Tarteel &amp; Tajweed</h3>
-              <p className="mt-3 leading-7 text-gray-600">
+              <p className="mt-3 leading-7 text-slate-600">
                 Develop more confident recitation through correct rhythm,
                 pronunciation, and Tajweed rules.
               </p>
@@ -74,7 +77,7 @@ export default function AcademyPage() {
 
               <h3 className="mt-2 text-xl font-medium">Hifz Coaching</h3>
 
-              <p className="mt-3 leading-7 text-gray-600">
+              <p className="mt-3 leading-7 text-slate-600">
                 Build a consistent memorization and revision routine through
                 focused coaching, guidance, and accountability.
               </p>
@@ -93,7 +96,7 @@ export default function AcademyPage() {
         <section className="mx-auto mt-24 max-w-4xl text-center">
           <h2 className="text-3xl font-semibold">How Learning Works</h2>
 
-          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+          <p className="mx-auto mt-4 max-w-2xl text-slate-600">
             Learning is structured around the student’s goals, current level,
             and ability to maintain a consistent routine.
           </p>
@@ -101,7 +104,7 @@ export default function AcademyPage() {
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             <div className="rounded-lg border p-6 transition hover:shadow-lg">
               <h3 className="font-medium">01: Understand Your Goals</h3>
-              <p className="mt-2 text-gray-600">
+              <p className="mt-2 text-slate-600">
                 We identify what the student wants to learn and the kind of
                 support they need.
               </p>
@@ -109,7 +112,7 @@ export default function AcademyPage() {
 
             <div className="rounded-lg border p-6 transition hover:shadow-lg">
               <h3 className="font-medium">02: Structured Learning</h3>
-              <p className="mt-2 text-gray-600">
+              <p className="mt-2 text-slate-600">
                 Lessons and coaching are organized into manageable steps that
                 support steady progress.
               </p>
@@ -117,7 +120,7 @@ export default function AcademyPage() {
 
             <div className="rounded-lg border p-6 transition hover:shadow-lg">
               <h3 className="font-medium">03: Ongoing Guidance</h3>
-              <p className="mt-2 text-gray-600">
+              <p className="mt-2 text-slate-600">
                 Students receive guidance and feedback to help them stay
                 consistent and continue developing.
               </p>
@@ -135,7 +138,7 @@ export default function AcademyPage() {
             Plan Your Qur’an Memorization
           </h2>
 
-          <p className="mx-auto mt-4 max-w-2xl leading-8 text-gray-700">
+          <p className="mx-auto mt-4 max-w-2xl leading-8 text-slate-700">
             Use the free Hifz Planner to organize new memorization and revision
             and build a more consistent routine.
           </p>
@@ -154,7 +157,7 @@ export default function AcademyPage() {
             Ready to begin your learning journey?
           </h2>
 
-          <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+          <p className="mx-auto mt-4 max-w-2xl text-slate-600">
             Explore the programs above or get in touch if you need help
             deciding where to begin.
           </p>
