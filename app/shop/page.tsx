@@ -15,12 +15,8 @@ export default async function ShopPage() {
           <div className="mx-auto max-w-7xl px-6 py-20 md:py-28">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-700">OmmSulaim Digital Shop</p>
-              <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 md:text-6xl">
-                Practical digital resources for learning and teaching.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-                Explore ebooks, workbooks, planners, and other digital resources created to make learning and teaching more practical.
-              </p>
+              <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 md:text-6xl">Practical digital resources for learning and teaching.</h1>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">Explore ebooks, workbooks, planners, and other digital resources created to make learning and teaching more practical.</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#paid-products" className="rounded-xl bg-sky-700 px-5 py-3 text-sm font-semibold text-white hover:bg-sky-800">Browse Products</a>
                 <a href="#free-resources" className="rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-800 hover:bg-slate-50">Free Resources</a>
@@ -33,7 +29,6 @@ export default async function ShopPage() {
           <p className="text-sm font-semibold uppercase tracking-wider text-amber-700">Digital products</p>
           <h2 className="mt-2 text-3xl font-bold text-slate-950">Resources you can purchase</h2>
           <p className="mt-3 max-w-2xl text-slate-600">Downloadable resources for learners, parents, teachers, and families.</p>
-
           {paidProducts.length > 0 ? (
             <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {paidProducts.map((product) => (
@@ -42,8 +37,8 @@ export default async function ShopPage() {
                   <h3 className="text-xl font-semibold text-slate-950">{product.title}</h3>
                   <p className="mt-3 flex-1 leading-7 text-slate-600">{product.description}</p>
                   <div className="mt-6 flex items-center justify-between gap-4">
-                    <span className="font-semibold text-slate-950">{product.price}</span>
-                    <Link href={product.buyLink || "/contact"} className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800">Purchase</Link>
+                    <span className="font-semibold text-slate-950">{product.currency === "USD" ? "$" : "₦"}{product.price}</span>
+                    <Link href={`/shop/checkout?product=${encodeURIComponent(product.id)}`} className="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800">Purchase</Link>
                   </div>
                 </article>
               ))}
@@ -61,7 +56,6 @@ export default async function ShopPage() {
             <p className="text-sm font-semibold uppercase tracking-wider text-sky-700">Free resources</p>
             <h2 className="mt-2 text-3xl font-bold text-slate-950">Useful resources, free to use.</h2>
             <p className="mt-3 max-w-2xl text-slate-600">Start with free resources and use them at home or in your learning routine.</p>
-
             <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <article className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
                 <span className="text-sm font-semibold text-sky-700">FREE</span>
@@ -69,7 +63,6 @@ export default async function ShopPage() {
                 <p className="mt-3 leading-7 text-slate-600">Build a practical weekly routine for new memorization, recent revision, and older revision.</p>
                 <Link href="/academy/quran-memorization" className="mt-6 inline-flex rounded-lg bg-sky-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-sky-800">Use the Planner</Link>
               </article>
-
               {freeProducts.map((product) => (
                 <article key={product.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
                   <span className="text-sm font-semibold text-sky-700">FREE</span>
