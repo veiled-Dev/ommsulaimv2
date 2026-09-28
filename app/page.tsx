@@ -121,34 +121,58 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* About */}
+        {/* About OmmSulaim */}
         <section className="py-20">
-          <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-2 md:items-center">
-            <div>
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center">
               <p className="text-sm font-semibold uppercase tracking-wider text-amber-600">
                 About OmmSulaim
               </p>
 
               <h2 className="mt-2 text-3xl font-semibold text-slate-900 md:text-4xl">
-                Practical solutions for learning and the digital world
+                Meaningful education. Practical digital solutions.
               </h2>
+
+              <p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-600">
+                OmmSulaim brings together online learning, digital resources,
+                and modern web solutions designed to support purposeful growth.
+              </p>
             </div>
 
-            <div>
-              <p className="leading-8 text-slate-600">
-                OmmSulaim combines education and digital solutions to make
-                learning more structured, accessible, and practical.
-              </p>
+            <div className="mt-12 grid gap-8 md:grid-cols-2">
+              <div className="rounded-2xl border border-slate-200 bg-white p-8">
+                <h3 className="text-2xl font-semibold text-slate-900">
+                  What we do
+                </h3>
 
-              <p className="mt-4 leading-8 text-slate-600">
-                From Qur’an and Arabic learning through OmmSulaim Academy to
-                digital resources and web solutions, the goal is simple:
-                create useful things that solve real problems.
-              </p>
+                <p className="mt-4 leading-8 text-slate-600">
+                  OmmSulaim Digital Service Ltd is a Nigerian-registered company
+                  working across education, digital learning, and practical
+                  technology services. Through OmmSulaim Academy, digital
+                  resources, and web services, we create useful solutions that
+                  make learning and online work more structured, accessible,
+                  and practical.
+                </p>
+              </div>
 
+              <div className="rounded-2xl border border-slate-200 bg-white p-8">
+                <h3 className="text-2xl font-semibold text-slate-900">
+                  Our purpose
+                </h3>
+
+                <p className="mt-4 leading-8 text-slate-600">
+                  Our mission is to provide meaningful education and practical
+                  digital solutions that empower learning and growth in a
+                  values-driven way. We aim to build useful, faith-centred
+                  learning experiences and technologies people can trust.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 text-center">
               <Link
                 href="/about"
-                className="mt-6 inline-block font-semibold text-sky-700 hover:text-amber-700"
+                className="font-semibold text-sky-700 hover:text-amber-700"
               >
                 Learn more about OmmSulaim →
               </Link>
