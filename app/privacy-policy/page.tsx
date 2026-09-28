@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
 
           <div>
             <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
-            <p>If you have questions about this privacy policy, contact us at <a href="mailto:info@ommsulaim.com" className="text-blue-600">info@ommsulaim.com</a>.</p>
+            <p>If you have questions about this privacy policy, contact us at <a href="mailto:support@ommsulaim.com" className="text-blue-600">support@ommsulaim.com</a>.</p>
           </div>
         </section>
       </main>
