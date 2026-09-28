@@ -15,13 +15,13 @@ export default function ContactPage() {
             Contact Us
           </h1>
           <p className="mt-6 text-lg text-slate-600">
-            We’re here to answer your questions and guide you. Reach out via WhatsApp, email, or the form below.
+            Whether you have a question about the Academy, a digital resource, or a website project, tell us what you need and we’ll point you in the right direction.
           </p>
         </section>
 
         {/* Contact Information */}
         <section className="mt-24 max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold">Get in Touch</h2>
+          <h2 className="text-3xl font-semibold">Let’s talk</h2>
           <p className="mt-4 text-slate-600">
             WhatsApp: <a href="https://wa.me/2349160341006" className="font-medium text-sky-700">+2349160341006</a> <br />
             Email: <a href="mailto:support@ommsulaim.com" className="font-medium text-sky-700">support@ommsulaim.com</a>
