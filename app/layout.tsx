@@ -1,13 +1,16 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Link from "next/link";
+import Footer from "@/components/Footer";
 import type { ReactNode } from "react";
 import { Suspense } from "react";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
-  title: "OmmSulaim Digital Services Ltd",
-  description: "Faith-centred education and digital solutions",
+  title: {
+    default: "OmmSulaim Digital Service Ltd | Education, Digital Resources & Web Solutions",
+    template: "%s | OmmSulaim Digital Service Ltd",
+  },
+  description: "Qur’an and Arabic learning, practical digital resources, and custom web solutions for educators, small businesses, and organisations.",
 };
 
 export default function RootLayout({
@@ -28,23 +31,7 @@ export default function RootLayout({
             <GoogleAnalytics gaId={gaId} />
           </Suspense>
         )}
-        <div className="flex min-h-screen flex-col">
-          <main className="flex-1">{children}</main>
-
-          <footer className="border-t border-slate-200 bg-white px-6 py-6 text-center text-sm text-slate-800">
-            <p>© 2025 OmmSulaim Academy™ | All Rights Reserved</p>
-            <p className="mt-1">
-              <Link href="/terms" className="hover:text-amber-700">
-                Terms
-              </Link>
-              <span className="mx-2">|</span>
-              <Link href="/privacy-policy" className="hover:text-amber-700">
-                Privacy Policy
-              </Link>
-            </p>
-          </footer>
-        </div>
-      </body>
+        <div className="flex min-h-screen flex-col">\n          <main className="flex-1">{children}</main>\n          <Footer />\n        </div>\n      </body>
     </html>
   );
 }
