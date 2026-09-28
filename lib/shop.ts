@@ -3,6 +3,7 @@ import path from "path";
 
 export type ShopCategory = "digital-products";
 export type ShopAccess = "paid" | "free";
+export type ShopCurrency = "NGN" | "USD";
 
 export interface ShopProduct {
   id: string;
@@ -11,7 +12,9 @@ export interface ShopProduct {
   title: string;
   description: string;
   price: string;
+  currency: ShopCurrency;
   buyLink: string;
+  downloadLink: string;
 }
 
 const SHOP_FILE = path.join(process.cwd(), "shop.json");
@@ -23,6 +26,10 @@ function asString(value: unknown, fallback = ""): string {
 
 function asAccess(value: unknown): ShopAccess {
   return value === "free" ? "free" : "paid";
+}
+
+function asCurrency(value: unknown): ShopCurrency {
+  return value === "USD" ? "USD" : "NGN";
 }
 
 function asCategory(value: unknown): ShopCategory {
@@ -54,7 +61,9 @@ function normalizeProduct(value: unknown): ShopProduct | null {
     title,
     description: asString(row.description),
     price: asString(row.price),
+    currency: asCurrency(row.currency),
     buyLink: asString(row.buyLink, "/contact") || "/contact",
+    downloadLink: asString(row.downloadLink),
   };
 }
 
@@ -65,6 +74,11 @@ async function writeProducts(products: ShopProduct[]) {
 export async function getAllShopProducts(): Promise<ShopProduct[]> {
   const raw = await readRawProducts();
   return raw.map(normalizeProduct).filter((x): x is ShopProduct => !!x);
+}
+
+export async function getShopProductById(id: string): Promise<ShopProduct | null> {
+  const products = await getAllShopProducts();
+  return products.find((product) => product.id === id) ?? null;
 }
 
 export async function getShopProductsByCategory(category: ShopCategory): Promise<ShopProduct[]> {
@@ -83,7 +97,9 @@ export async function createShopProduct(
     title: input.title.trim(),
     description: input.description.trim(),
     price: input.price.trim(),
+    currency: input.currency,
     buyLink: input.buyLink.trim() || "/contact",
+    downloadLink: input.downloadLink.trim(),
   };
 
   products.unshift(created);
@@ -107,7 +123,9 @@ export async function updateShopProduct(
     title: updates.title?.trim() ?? current.title,
     description: updates.description?.trim() ?? current.description,
     price: updates.price?.trim() ?? current.price,
+    currency: updates.currency ?? current.currency,
     buyLink: updates.buyLink?.trim() || current.buyLink || "/contact",
+    downloadLink: updates.downloadLink?.trim() ?? current.downloadLink,
   };
 
   products[index] = next;
