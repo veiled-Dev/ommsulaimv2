@@ -31,7 +31,7 @@ export default function AcademyPage() {
         {/* Programs */}
         <section className="mx-auto mt-24 max-w-5xl">
           <div className="text-center">
-            <h2 className="text-3xl font-semibold">Our Programs</h2>
+            <h2 className="text-3xl font-semibold">Our Learning Programs</h2>
             <p className="mx-auto mt-4 max-w-2xl text-slate-600">
               Choose the learning path that matches your current goals.
             </p>
@@ -39,7 +39,7 @@ export default function AcademyPage() {
 
           <div className="mt-8 grid gap-8 md:grid-cols-3">
             <div className="rounded-2xl border border-slate-200 p-6 transition hover:border-amber-300 hover:shadow-lg">
-              <h3 className="text-xl font-medium">Qur’an Reading</h3>
+              <h3 className="text-xl font-semibold text-slate-900">Qur’an Reading</h3>
               <p className="mt-3 leading-7 text-slate-600">
                 Learn to read the Qur’an fluently with proper pronunciation and
                 Tajweed foundations.
@@ -55,7 +55,7 @@ export default function AcademyPage() {
             </div>
 
             <div className="rounded-2xl border border-slate-200 p-6 transition hover:border-amber-300 hover:shadow-lg">
-              <h3 className="text-xl font-medium">Tarteel &amp; Tajweed</h3>
+              <h3 className="text-xl font-semibold text-slate-900">Tarteel &amp; Tajweed</h3>
               <p className="mt-3 leading-7 text-slate-600">
                 Develop more confident recitation through correct rhythm,
                 pronunciation, and Tajweed rules.
@@ -75,7 +75,7 @@ export default function AcademyPage() {
                 Coaching
               </p>
 
-              <h3 className="mt-2 text-xl font-medium">Hifz Coaching</h3>
+              <h3 className="mt-2 text-xl font-semibold text-slate-900">Hifz Coaching</h3>
 
               <p className="mt-3 leading-7 text-slate-600">
                 Build a consistent memorization and revision routine through
@@ -144,7 +144,7 @@ export default function AcademyPage() {
           </p>
 
           <Link
-            href="/academy/quran-memorization?entry=academy"
+            href="/academy/quran-memorization"
             className="mt-7 inline-block rounded-lg bg-sky-700 px-6 py-3 text-sm font-medium text-white transition hover:bg-sky-800"
           >
             Open the Free Hifz Planner
